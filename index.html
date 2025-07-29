@@ -227,46 +227,45 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="item">
       <div class="img-fill">
         <img src="assets/images/medico1.webp"
-             alt="Médico domiciliario realizando consulta en casa"
-             style="width:100%;height:100%;object-fit:cover;" />
+             alt="Médico domiciliario realizando consulta en casa" />
       </div>
     </div>
     <!-- Item 2 -->
     <div class="item">
       <div class="img-fill">
         <img src="assets/images/medico2.webp"
-             alt="Equipo de salud para terapia respiratoria en domicilio"
-             style="width:100%;height:100%;object-fit:cover;" />
+             alt="Equipo de salud para terapia respiratoria en domicilio" />
       </div>
     </div>
     <!-- Item 3 -->
     <div class="item">
       <div class="img-fill">
         <img src="assets/images/medico3.webp"
-             alt="Servicios médicos y exámenes de laboratorio a domicilio"
-             style="width:100%;height:100%;object-fit:cover;" />
+             alt="Servicios médicos y exámenes de laboratorio a domicilio" />
       </div>
     </div>
   </div>
+
   <!-- Texto superpuesto -->
-<div class="hero-text text-center">
-  <h1 class="fw-bold display-4 text-dark text-shadow-light">
-    MEDIGO A CASA 24
-  </h1>
-  <h6 class="mb-4 fs-5 text-dark text-shadow-light">
-    Atención médica domiciliaria en Bogotá y Medellín
-  </h6>
-  <div class="main-white-button scroll-to-section">
-    <a href="#contacto" class="btn btn-success px-4 py-2 rounded-pill fw-bold shadow">
-      Solicitar servicio ahora
-    </a>
+  <div class="hero-text text-center">
+    <h1 class="fw-bold text-white display-4 text-shadow">
+      MEDIGO A CASA 24
+    </h1>
+    <h6 class="mb-4 text-white fs-5 text-shadow">
+      Atención médica domiciliaria en Bogotá y Medellín
+    </h6>
+    <div class="main-white-button scroll-to-section">
+      <a href="#contacto" class="btn btn-success px-4 py-2 rounded-pill fw-bold shadow">
+        Solicitar servicio ahora
+      </a>
+    </div>
   </div>
-</div>
 </div>
 <!-- ***** Main Banner Area End ***** -->
 
+
 <style>
-/* Hero texto centrado */
+/* --- Texto superpuesto --- */
 .hero-text {
   position: absolute;
   top: 50%;
@@ -274,37 +273,48 @@ document.addEventListener('DOMContentLoaded', function() {
   transform: translate(-50%, -50%);
   z-index: 20;
   padding: 20px;
+  text-align: center;
+}
+.text-shadow {
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
 }
 
-/* Sombra clara (para texto oscuro) */
-.text-shadow-light {
-  text-shadow: 1px 1px 5px rgba(255,255,255,0.7);
-}
-
-/* Modern Slider ajuste */
+/* --- Slider con altura controlada --- */
 .Modern-Slider,
 .Modern-Slider .item,
 .Modern-Slider .img-fill {
-  height: 100vh !important;
-  min-height: 500px;
+  width: 100%;
+  height: 70vh; /* controla el tamaño de la imagen (70% de la pantalla) */
+  min-height: 400px; /* altura mínima */
   position: relative;
-  background: transparent !important; /* evita fondo negro */
+  overflow: hidden;
 }
 .Modern-Slider .img-fill img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* llena el espacio sin deformar */
   display: block;
 }
 
-/* Responsivo */
+/* --- Banner sin márgenes --- */
+.main-banner {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #fff;
+}
+
+/* --- Responsivo: menos alto en móviles --- */
 @media (max-width: 768px) {
+  .Modern-Slider,
+  .Modern-Slider .item,
+  .Modern-Slider .img-fill {
+    height: 50vh; /* más pequeño en móvil */
+    min-height: 300px;
+  }
   .hero-text h1 { font-size: 2rem; }
   .hero-text h6 { font-size: 1rem; }
 }
 </style>
-
-
 
 <!-- ***** About Area Starts ***** -->
 <section class="section bg-light" id="about">
