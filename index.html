@@ -312,76 +312,57 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="item">
       <div class="img-fill">
         <img src="assets/images/medico1.webp"
-             alt="Médico domiciliario realizando consulta en casa"
-             style="width:100%;height:100%;object-fit:cover;" />
+             alt="Médico domiciliario realizando consulta en casa" />
       </div>
     </div>
-    <!-- Item 2 -->
-    <div class="item">
-      <div class="img-fill">
-        <img src="assets/images/medico2.webp"
-             alt="Equipo de salud para terapia respiratoria en domicilio"
-             style="width:100%;height:100%;object-fit:cover;" />
-      </div>
-    </div>
-    <!-- Item 3 -->
-    <div class="item">
-      <div class="img-fill">
-        <img src="assets/images/medico3.webp"
-             alt="Servicios médicos y exámenes de laboratorio a domicilio"
-             style="width:100%;height:100%;object-fit:cover;" />
-      </div>
-    </div>
+    <!-- Otros slides -->
   </div>
 
-  <!-- Texto superpuesto -->
-  <div class="hero-text text-center">
-    <h1 class="fw-bold text-white display-4 text-shadow">
-    </h1>
-    <h6 class="mb-4 text-white fs-5 text-shadow">
-    </h6>
-    <div class="main-white-button scroll-to-section">
-      </a>
+  <!-- Texto centrado sobre la imagen -->
+  <div class="hero-text text-overlay text-center">
+    <div class="inner-content">
+      <h1 class="fw-bold text-white">MEDIGO A CASA 24</h1>
+      <h6 class="mb-4 text-white">Atención médica domiciliaria en Bogotá y Medellín</h6>
+      <div class="main-white-button scroll-to-section">
+        <a href="https://wa.me/573027125931?text=Hola%20quiero%20información%20sobre%20los%20servicios%20médicos"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="btn btn-light px-4 py-2 rounded-pill fw-bold">
+          Solicitar servicio ahora
+        </a>
+      </div>
     </div>
   </div>
 </div>
-<!-- Texto superpuesto con fondo -->
-<div class="hero-text text-overlay text-center text-lg-start">
-  <div class="inner-content">
-    <h1 class="fw-bold text-white">MEDIGO A CASA 24</h1>
-    <h6 class="mb-4 text-white">Atención médica domiciliaria en Bogotá y Medellín</h6>
-    <div class="main-white-button scroll-to-section">
-      <a href="https://wa.me/573027125931?text=Hola%20quiero%20información%20sobre%20los%20servicios%20médicos"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="btn btn-light px-4 py-2 rounded-pill fw-bold">
-        Solicitar servicio ahora
-      </a>
-    </div>
-  </div>
-</div>
+<!-- ***** Main Banner Area End ***** -->
 
 <style>
+/* El contenedor principal ya tiene position-relative */
+.main-banner {
+  position: relative;
+}
+
+/* Texto centrado solo dentro de la portada */
 .hero-text {
   position: absolute;
-  top: 50%;           /* Centrado vertical */
-  left: 50%;          /* Centrado horizontal */
+  top: 50%;   /* centro vertical de la imagen */
+  left: 50%;  /* centro horizontal de la imagen */
   transform: translate(-50%, -50%);
   z-index: 20;
-  padding: 30px;
-  width: auto;
   max-width: 90%;
+  padding: 30px;
 }
+
 .text-overlay {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5); /* fondo oscuro */
   border-radius: 10px;
 }
+
 .text-overlay h1,
 .text-overlay h6 {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
 </style>
-
 
 
 <!-- ***** About Area Starts ***** -->
