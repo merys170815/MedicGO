@@ -78,6 +78,7 @@
 
 <!-- ================= ESTILOS ================= -->
 <style>
+
 /* HEADER LIMPIO */
 .header-area {
   background: #ffffff;
@@ -143,30 +144,73 @@
 }
 .whatsapp-float:hover { transform: scale(1.1); box-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
 .whatsapp-icon { margin-top: 15px; }
-
-/* === Ajustes móviles (menú + logo + título) === */
-@media (max-width: 767px) {
-  .logo-img {
-    max-height: 35px; /* Logo más pequeño */
-  }
-  .brand-name {
-    font-size: 1rem;   /* Texto de título más pequeño */
-    white-space: nowrap; /* Evita salto de línea raro */
-  }
-  .hero img,
-  .main-banner img {
-    width: 100%;
-    max-height: 280px; /* Imágenes más pequeñas */
-    object-fit: cover;
-  }
+/* ===== Banner general ===== */
+.main-banner {
+  margin-top: 100px; /* espacio por el header fijo */
+  position: relative;
 }
 
-/* Ajuste general para imágenes hero en desktop también */
-.hero img,
-.main-banner img {
+/* Columna de texto */
+.left-content {
+  background: linear-gradient(135deg, #28a745, #6bd98b);
+  color: #fff;
+  min-height: 100%;
+}
+.left-content h1 {
+  font-size: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+.left-content h6 {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+/* Botón dentro del bloque de texto */
+.main-white-button a {
+  background: #fff;
+  color: #28a745;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 10px 25px;
+  transition: all 0.3s ease;
+}
+.main-white-button a:hover {
+  background: #28a745;
+  color: #fff;
+}
+
+/* ===== Slider ===== */
+.Modern-Slider,
+.Modern-Slider .item,
+.Modern-Slider .img-fill {
+  height: auto !important;
+}
+.img-fill img {
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  height: auto !important;
+  object-fit: contain !important; /* evita cortar caras */
+  display: block;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 991px) {
+  .main-banner {
+    margin-top: 80px !important;
+    padding: 20px;
+    text-align: center;
+  }
+  .left-content {
+    padding: 30px 20px;
+  }
+  .left-content h1 {
+    font-size: 1.8rem;
+  }
+  .left-content h6 {
+    font-size: 1rem;
+  }
+  .img-fill img {
+    max-height: 280px;
+  }
 }
 
 </style>
@@ -188,43 +232,47 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-
 <!-- ***** Main Banner Area Start ***** -->
-<div id="top">
+<div id="top" class="main-banner">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="left-content">
-          <div class="inner-content">
-            <h4>MEDIGO A CASA 24</h4>
-            <h6>Atención médica domiciliaria en Bogotá y Medellín</h6>
+    <div class="row align-items-center">
+      <!-- Columna de texto -->
+      <div class="col-lg-4 col-md-12">
+        <div class="left-content d-flex flex-column justify-content-center h-100 p-4">
+          <div class="inner-content text-center text-lg-start">
+            <h1 class="fw-bold">MEDIGO A CASA 24</h1>
+            <h6 class="mb-4">Atención médica domiciliaria en Bogotá y Medellín</h6>
             <div class="main-white-button scroll-to-section">
-              <a href="#contacto">Solicitar servicio ahora</a>
+              <a href="#contacto" class="btn btn-light px-4 py-2 rounded-pill fw-bold">
+                Solicitar servicio ahora
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-8">
-        <div class="main-banner header-text">
-          <div class="Modern-Slider">
-            <!-- Item 1 -->
-            <div class="item">
-              <div class="img-fill">
-                <img src="assets/images/medico1.png" alt="Médico domiciliario realizando consulta en casa">
-              </div>
+
+      <!-- Columna slider -->
+      <div class="col-lg-8 col-md-12">
+        <div class="Modern-Slider">
+          <!-- Item 1 -->
+          <div class="item">
+            <div class="img-fill">
+              <img src="assets/images/medico1.png"
+                   alt="Médico domiciliario realizando consulta en casa" />
             </div>
-            <!-- Item 2 -->
-            <div class="item">
-              <div class="img-fill">
-                <img src="assets/images/medico2.png" alt="Equipo de salud para terapia respiratoria en domicilio">
-              </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="item">
+            <div class="img-fill">
+              <img src="assets/images/medico2.png"
+                   alt="Equipo de salud para terapia respiratoria en domicilio" />
             </div>
-            <!-- Item 3 -->
-            <div class="item">
-              <div class="img-fill">
-                <img src="assets/images/medico3.png" alt="Servicios médicos y exámenes de laboratorio a domicilio">
-              </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="item">
+            <div class="img-fill">
+              <img src="assets/images/medico3.png"
+                   alt="Servicios médicos y exámenes de laboratorio a domicilio" />
             </div>
           </div>
         </div>
@@ -233,6 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 <!-- ***** Main Banner Area End ***** -->
+
 <!-- ***** About Area Starts ***** -->
 <section class="section bg-light" id="about">
   <div class="container">
