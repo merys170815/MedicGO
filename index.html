@@ -362,6 +362,21 @@ document.addEventListener('DOMContentLoaded', function() {
 .text-overlay h6 {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
+
+/* Eliminar espacio entre barra y portada */
+.main-banner {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Si el menú es fijo, compensar altura automáticamente */
+.navbar.fixed-top + .main-banner {
+  margin-top: 0 !important;
+}
+body {
+  padding-top: 0 !important;
+}
+
 </style>
 
 
