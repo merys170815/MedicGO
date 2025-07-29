@@ -139,9 +139,13 @@
 /* BOTÓN WHATSAPP HEADER */
 .header-contact .btn { font-size: 0.95rem; font-weight: 600; border-radius: 5px; padding: 6px 12px; background: #25d366; color: white; border: none; }
 .header-contact .btn:hover { background: #1ebe5d; }
-
-/* MENÚ MOVIL */
-.menu-trigger { font-size: 2rem; color: #0d6efd; cursor: pointer; display: none; }
+/* MENÚ MÓVIL */
+.menu-trigger {
+  font-size: 2rem;
+  color: #0d6efd;
+  cursor: pointer;
+  display: none;
+}
 @media (max-width: 991px) {
   .menu-trigger { display: block; }
   .header-contact { display: none; }
@@ -149,18 +153,19 @@
     display: none;
     flex-direction: column;
     background: #fff;
-    position: absolute;
-    top: 70px;
-    right: 10px;
-    width: 200px;
-    border-radius: 5px;
+    position: relative; /* Cambiado de absolute a relative */
+    top: 60px;          /* Se abre debajo del header */
+    width: 100%;
+    border-radius: 0;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    padding: 15px;
+    padding: 15px 0;
+    z-index: 999;
   }
-  .header-area .nav li { margin: 12px 0; }
+  .header-area .nav li { margin: 12px 0; text-align: center; }
   .header-area .nav li a { color: #0d6efd; padding: 10px; width: 100%; display: block; }
   .header-area .nav.show { display: flex !important; }
 }
+
 
 /* BOTÓN WHATSAPP FLOTANTE */
 .whatsapp-float {
