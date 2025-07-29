@@ -105,29 +105,26 @@
     <i class="fa fa-whatsapp whatsapp-icon"></i>
 </a>
 
-<!-- ================= ESTILOS ================= -->
-<style>
-
-.navbar .navbar-brand img {
-  max-height: 50px; /* ajusta el tamaño del logo */
-  height: auto;
-  width: auto;
-}
-
-.navbar-nav .nav-link {
-  font-size: 1rem; /* mejora lectura */
-  padding: 10px 15px;
-}
-
-/* HEADER */
+</* --- HEADER FIJO --- */
 .header-area {
   background: #ffffff;
   padding: 8px 0;
-  position: sticky;
+  position: fixed;   /* se mantiene fijo */
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 9999;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
+/* --- SEPARACIÓN DEL CONTENIDO EN MÓVILES --- */
+@media (max-width: 991px) {
+  .main-banner {
+    margin-top: 80px; /* deja espacio debajo del menú */
+  }
+}
+
+/* LOGO */
 .logo-img { max-height: 50px; margin-right: 10px; transition: transform 0.3s ease-in-out; }
 .logo-img:hover { transform: scale(1.05); }
 .brand-name { font-size: 1.4rem; font-weight: 700; color: #0d6efd; text-transform: uppercase; text-decoration: none !important; }
@@ -139,6 +136,7 @@
 /* BOTÓN WHATSAPP HEADER */
 .header-contact .btn { font-size: 0.95rem; font-weight: 600; border-radius: 5px; padding: 6px 12px; background: #25d366; color: white; border: none; }
 .header-contact .btn:hover { background: #1ebe5d; }
+
 /* MENÚ MÓVIL */
 .menu-trigger {
   font-size: 2rem;
@@ -153,8 +151,9 @@
     display: none;
     flex-direction: column;
     background: #fff;
-    position: relative; /* Cambiado de absolute a relative */
-    top: 60px;          /* Se abre debajo del header */
+    position: absolute;
+    top: 70px; /* aparece justo debajo del header */
+    right: 0;
     width: 100%;
     border-radius: 0;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -165,7 +164,6 @@
   .header-area .nav li a { color: #0d6efd; padding: 10px; width: 100%; display: block; }
   .header-area .nav.show { display: flex !important; }
 }
-
 
 /* BOTÓN WHATSAPP FLOTANTE */
 .whatsapp-float {
