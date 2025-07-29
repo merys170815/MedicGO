@@ -143,6 +143,31 @@
 }
 .whatsapp-float:hover { transform: scale(1.1); box-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
 .whatsapp-icon { margin-top: 15px; }
+/* === Ajustes móviles (menú + logo + título) === */
+@media (max-width: 767px) {
+  .logo-img {
+    max-height: 35px; /* Logo más pequeño */
+  }
+  .brand-name {
+    font-size: 1rem;   /* Texto de título más pequeño */
+    white-space: nowrap; /* Evita salto de línea raro */
+  }
+  .hero img,
+  .main-banner img {
+    width: 100%;
+    max-height: 280px; /* Imágenes más pequeñas */
+    object-fit: cover;
+  }
+}
+
+/* Ajuste general para imágenes hero en desktop también */
+.hero img,
+.main-banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 </style>
 
 <!-- ================= SCRIPT PARA MENÚ ================= -->
@@ -161,6 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+
 
 <!-- ***** Main Banner Area Start ***** -->
 <div id="top">
