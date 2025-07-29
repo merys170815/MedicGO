@@ -252,18 +252,28 @@ document.addEventListener('DOMContentLoaded', function() {
   <!-- Texto superpuesto -->
   <div class="hero-text text-center">
     <h1 class="fw-bold text-white display-4 text-shadow">
-      MEDIGO A CASA 24
     </h1>
     <h6 class="mb-4 text-white fs-5 text-shadow">
-      Atención médica domiciliaria en Bogotá y Medellín
     </h6>
     <div class="main-white-button scroll-to-section">
-      <a href="#contacto" class="btn btn-success px-4 py-2 rounded-pill fw-bold shadow">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Texto con fondo -->
+<div class="left-content d-flex flex-column justify-content-center h-100 p-4 text-overlay">
+  <div class="inner-content text-center text-lg-start">
+    <h1 class="fw-bold text-white">MEDIGO A CASA 24</h1>
+    <h6 class="mb-4 text-white">Atención médica domiciliaria en Bogotá y Medellín</h6>
+    <div class="main-white-button scroll-to-section">
+      <a href="#contacto" class="btn btn-light px-4 py-2 rounded-pill fw-bold">
         Solicitar servicio ahora
       </a>
     </div>
   </div>
 </div>
+
 <!-- ***** Main Banner Area End ***** -->
 
 <style>
@@ -300,6 +310,18 @@ document.addEventListener('DOMContentLoaded', function() {
   .hero-text h1 { font-size: 2rem; }
   .hero-text h6 { font-size: 1rem; }
 }
+/* Fondo oscuro translúcido para texto */
+.text-overlay {
+  background: rgba(0, 0, 0, 0.5);  /* negro al 50% */
+  border-radius: 10px;
+}
+
+/* Sombra ligera en texto (opcional) */
+.text-overlay h1,
+.text-overlay h6 {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
 </style>
 
 
