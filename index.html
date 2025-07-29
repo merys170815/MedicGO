@@ -200,6 +200,91 @@
     color: #25d366; /* verde WhatsApp */
     font-weight: 800;
 }
+.img-contacto {
+  max-width: 250px;
+  height: auto;
+}
+
+/* Footer Moderno con esquema gris */
+.footer-custom {
+  background: #343a40; /* gris oscuro */
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  border-top: 3px solid #212529; /* gris más oscuro */
+}
+
+.footer-custom .footer-logo {
+  max-width: 160px;
+  transition: transform 0.3s ease-in-out;
+}
+.footer-custom .footer-logo:hover {
+  transform: scale(1.05);
+}
+
+.footer-custom .footer-icon {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.footer-custom .footer-icon:hover {
+  color: #ffc107; /* amarillo para resaltar */
+  transform: translateY(-3px);
+}
+
+.footer-custom p,
+.footer-custom small {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #fff !important;
+}
+
+@media (max-width: 991px) {
+  .footer-custom .text-lg-end {
+    text-align: center !important;
+    margin-top: 15px;
+  }
+}
+
+.footer-custom .footer-services li {
+  text-align: center;
+}
+.footer-custom .footer-services a {
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.footer-custom .footer-services .service-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 0 auto 8px auto;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.footer-custom .footer-services span {
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+}
+.footer-custom .footer-services a:hover .service-icon {
+  background: #6c757d; /* gris medio */
+  transform: scale(1.1);
+}
+.footer-custom .footer-services a:hover span {
+  color: #6c757d; /* gris medio texto */
+}
+
+.hover-shadow {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+}
+
 
 </style>
 
@@ -227,21 +312,24 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="item">
       <div class="img-fill">
         <img src="assets/images/medico1.webp"
-             alt="Médico domiciliario realizando consulta en casa" />
+             alt="Médico domiciliario realizando consulta en casa"
+             style="width:100%;height:100%;object-fit:cover;" />
       </div>
     </div>
     <!-- Item 2 -->
     <div class="item">
       <div class="img-fill">
         <img src="assets/images/medico2.webp"
-             alt="Equipo de salud para terapia respiratoria en domicilio" />
+             alt="Equipo de salud para terapia respiratoria en domicilio"
+             style="width:100%;height:100%;object-fit:cover;" />
       </div>
     </div>
     <!-- Item 3 -->
     <div class="item">
       <div class="img-fill">
         <img src="assets/images/medico3.webp"
-             alt="Servicios médicos y exámenes de laboratorio a domicilio" />
+             alt="Servicios médicos y exámenes de laboratorio a domicilio"
+             style="width:100%;height:100%;object-fit:cover;" />
       </div>
     </div>
   </div>
@@ -249,72 +337,52 @@ document.addEventListener('DOMContentLoaded', function() {
   <!-- Texto superpuesto -->
   <div class="hero-text text-center">
     <h1 class="fw-bold text-white display-4 text-shadow">
-      MEDIGO A CASA 24
     </h1>
     <h6 class="mb-4 text-white fs-5 text-shadow">
-      Atención médica domiciliaria en Bogotá y Medellín
     </h6>
     <div class="main-white-button scroll-to-section">
-      <a href="#contacto" class="btn btn-success px-4 py-2 rounded-pill fw-bold shadow">
+      </a>
+    </div>
+  </div>
+</div>
+<!-- Texto superpuesto con fondo -->
+<div class="hero-text text-overlay text-center text-lg-start">
+  <div class="inner-content">
+    <h1 class="fw-bold text-white">MEDIGO A CASA 24</h1>
+    <h6 class="mb-4 text-white">Atención médica domiciliaria en Bogotá y Medellín</h6>
+    <div class="main-white-button scroll-to-section">
+      <a href="https://wa.me/573027125931?text=Hola%20quiero%20información%20sobre%20los%20servicios%20médicos"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn btn-light px-4 py-2 rounded-pill fw-bold">
         Solicitar servicio ahora
       </a>
     </div>
   </div>
 </div>
-<!-- ***** Main Banner Area End ***** -->
-
 
 <style>
-/* --- Texto superpuesto --- */
 .hero-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%;           /* Centrado vertical */
+  left: 50%;          /* Centrado horizontal */
   transform: translate(-50%, -50%);
   z-index: 20;
-  padding: 20px;
-  text-align: center;
+  padding: 30px;
+  width: auto;
+  max-width: 90%;
 }
-.text-shadow {
-  text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+.text-overlay {
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
 }
-
-/* --- Slider con altura controlada --- */
-.Modern-Slider,
-.Modern-Slider .item,
-.Modern-Slider .img-fill {
-  width: 100%;
-  height: 70vh; /* controla el tamaño de la imagen (70% de la pantalla) */
-  min-height: 400px; /* altura mínima */
-  position: relative;
-  overflow: hidden;
-}
-.Modern-Slider .img-fill img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* llena el espacio sin deformar */
-  display: block;
-}
-
-/* --- Banner sin márgenes --- */
-.main-banner {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: #fff;
-}
-
-/* --- Responsivo: menos alto en móviles --- */
-@media (max-width: 768px) {
-  .Modern-Slider,
-  .Modern-Slider .item,
-  .Modern-Slider .img-fill {
-    height: 50vh; /* más pequeño en móvil */
-    min-height: 300px;
-  }
-  .hero-text h1 { font-size: 2rem; }
-  .hero-text h6 { font-size: 1rem; }
+.text-overlay h1,
+.text-overlay h6 {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
 </style>
+
+
 
 <!-- ***** About Area Starts ***** -->
 <section class="section bg-light" id="about">
@@ -399,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
           </div>
           <div class="card-footer bg-transparent border-0 text-center pb-4">
-            <a href="https://wa.me/573024567890?text=Hola%20quiero%20una%20Consulta%20Médica%20Domiciliaria"
+            <a href="https://wa.me/573027125931?text=Hola%20quiero%20una%20Consulta%20Médica%20Domiciliaria"
                target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
               <i class="fa fa-whatsapp"></i> Solicitar servicio
             </a>
@@ -421,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
           </div>
           <div class="card-footer bg-transparent border-0 text-center pb-4">
-            <a href="https://wa.me/573024567890?text=Hola%20quiero%20una%20Terapia%20Respiratoria"
+            <a href="https://wa.me/573027125931?text=Hola%20quiero%20una%20Terapia%20Respiratoria"
                target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
               <i class="fa fa-whatsapp"></i> Solicitar servicio
             </a>
@@ -443,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
           </div>
           <div class="card-footer bg-transparent border-0 text-center pb-4">
-            <a href="https://wa.me/573024567890?text=Hola%20quiero%20Exámenes%20de%20Laboratorio"
+            <a href="https://wa.me/573027125931?text=Hola%20quiero%20Exámenes%20de%20Laboratorio"
                target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
               <i class="fa fa-whatsapp"></i> Solicitar servicio
             </a>
@@ -465,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
           </div>
           <div class="card-footer bg-transparent border-0 text-center pb-4">
-            <a href="https://wa.me/573024567890?text=Hola%20quiero%20una%20Ecografía%20Domiciliaria"
+            <a href="https://wa.me/573027125931?text=Hola%20quiero%20una%20Ecografía%20Domiciliaria"
                target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
               <i class="fa fa-whatsapp"></i> Solicitar servicio
             </a>
@@ -557,7 +625,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <!-- Imagen ilustrativa -->
       <div class="col-lg-6 text-center">
-        <img src="assets/images/contacto.jpg" alt="Contacto médico" class="img-fluid rounded-4 shadow-sm" style="max-width: 400px;">
+       <img src="assets/images/contacto.jpg" alt="Contacto médico" class="img-fluid rounded-4 shadow-sm" style="max-width: 250px; height: auto;">
       </div>
 
     </div>
@@ -583,7 +651,7 @@ document.addEventListener('DOMContentLoaded', function() {
               <span>Terapia</span>
             </a>
           </li>
-        <li class="list-inline-item mx-3">
+         <li class="list-inline-item mx-3">
   <a href="#laboratorio" aria-label="Exámenes de laboratorio">
     <div class="service-icon"><i class="fa fa-flask"></i></div>
     <span>Laboratorio</span>
