@@ -174,30 +174,37 @@
     max-height: 280px;
     object-fit: contain !important;
   }
-}
-/* Elimina espacio blanco arriba del banner */
+}/* Elimina el espacio entre el header y el banner */
 header + .main-banner,
 header + .hero {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
 
-/* Ajusta el texto dentro del banner */
+/* Asegura que el texto esté visible */
 .main-banner .caption,
 .hero .caption {
-  position: relative !important;
-  top: auto !important;
-  transform: none !important;
-  padding: 10px 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
+  width: 90%;
 }
 
-/* Texto más pequeño y ajustado */
-.main-banner h1, .main-banner h2, .hero h1, .hero h2 {
-  font-size: 1.5rem !important;
-  line-height: 1.3 !important;
-  margin: 10px 0;
+/* Ajusta el tamaño del título */
+.main-banner h1, .hero h1 {
+  font-size: 2rem;
+  color: #fff; /* Cambia el color si el fondo es claro */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
+
+/* Ajusta subtítulo si existe */
+.main-banner h2, .hero h2 {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
 
 </style>
 
