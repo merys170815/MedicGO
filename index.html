@@ -69,10 +69,11 @@
         <nav class="main-nav" role="navigation" aria-label="Menú principal">
 
           <!-- Logo + Nombre -->
-          <a href="index.html" class="logo d-flex align-items-center" aria-label="Ir al inicio">
-            <img src="assets/images/logo_medigo.png" alt="Logo de MEDIGO A CASA 24" class="logo-img">
-            <span class="brand-name">MEDIGO A CASA 24</span>
-          </a>
+        <a href="index.html" class="logo d-flex align-items-center">
+    <img src="assets/images/logo_medigo.png" alt="Logo MEDIGO A CASA 24" class="logo-img">
+    <span class="brand-name">MEDIGO A CASA <span class="highlight">24</span></span>
+</a>
+
 
           <!-- Botón menú móvil -->
           <a class="menu-trigger" aria-label="Abrir menú de navegación"><span>☰</span></a>
@@ -188,6 +189,18 @@
 @media (max-width: 991px) {
   .main-banner { padding: 20px; text-align: center; }
 }
+
+.brand-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0d6efd;
+    text-transform: uppercase;
+}
+.brand-name .highlight {
+    color: #25d366; /* verde WhatsApp */
+    font-weight: 800;
+}
+
 </style>
 
 <!-- ================= SCRIPT PARA MENÚ ================= -->
@@ -205,56 +218,91 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
 <!-- ***** Main Banner Area Start ***** -->
-<div id="top" class="main-banner">
-  <div class="container-fluid">
-    <div class="row align-items-center">
-      <!-- Columna de texto -->
-      <div class="col-lg-4 col-md-12">
-        <div class="left-content d-flex flex-column justify-content-center h-100 p-4">
-          <div class="inner-content text-center text-lg-start">
-            <h1 class="fw-bold">MEDIGO A CASA 24</h1>
-            <h6 class="mb-4">Atención médica domiciliaria en Bogotá y Medellín</h6>
-            <div class="main-white-button scroll-to-section">
-              <a href="#contacto" class="btn btn-light px-4 py-2 rounded-pill fw-bold">
-                Solicitar servicio ahora
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+<div id="top" class="main-banner position-relative">
 
-      <!-- Columna slider -->
-      <div class="col-lg-8 col-md-12">
-        <div class="Modern-Slider">
-          <!-- Item 1 -->
-          <div class="item">
-            <div class="img-fill">
-              <img src="assets/images/medico1.webp"
-                   alt="Médico domiciliario realizando consulta en casa" />
-            </div>
-          </div>
-          <!-- Item 2 -->
-          <div class="item">
-            <div class="img-fill">
-              <img src="assets/images/medico2.webp"
-                   alt="Equipo de salud para terapia respiratoria en domicilio" />
-            </div>
-          </div>
-          <!-- Item 3 -->
-          <div class="item">
-            <div class="img-fill">
-              <img src="assets/images/medico3.webp"
-                   alt="Servicios médicos y exámenes de laboratorio a domicilio" />
-            </div>
-          </div>
-        </div>
+  <!-- Slider -->
+  <div class="Modern-Slider">
+    <!-- Item 1 -->
+    <div class="item">
+      <div class="img-fill">
+        <img src="assets/images/medico1.webp"
+             alt="Médico domiciliario realizando consulta en casa"
+             style="width:100%;height:100%;object-fit:cover;" />
       </div>
+    </div>
+    <!-- Item 2 -->
+    <div class="item">
+      <div class="img-fill">
+        <img src="assets/images/medico2.webp"
+             alt="Equipo de salud para terapia respiratoria en domicilio"
+             style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+    <!-- Item 3 -->
+    <div class="item">
+      <div class="img-fill">
+        <img src="assets/images/medico3.webp"
+             alt="Servicios médicos y exámenes de laboratorio a domicilio"
+             style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Texto superpuesto -->
+  <div class="hero-text text-center">
+    <h1 class="fw-bold text-white display-4 text-shadow">
+      MEDIGO A CASA 24
+    </h1>
+    <h6 class="mb-4 text-white fs-5 text-shadow">
+      Atención médica domiciliaria en Bogotá y Medellín
+    </h6>
+    <div class="main-white-button scroll-to-section">
+      <a href="#contacto" class="btn btn-success px-4 py-2 rounded-pill fw-bold shadow">
+        Solicitar servicio ahora
+      </a>
     </div>
   </div>
 </div>
 <!-- ***** Main Banner Area End ***** -->
+
+<style>
+/* Hero texto */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  padding: 20px;
+}
+.text-shadow {
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+}
+
+/* Modern Slider ajuste */
+.Modern-Slider,
+.Modern-Slider .item,
+.Modern-Slider .img-fill {
+  height: 100vh !important;
+  min-height: 500px;
+  position: relative;
+}
+.Modern-Slider .img-fill img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .hero-text h1 { font-size: 2rem; }
+  .hero-text h6 { font-size: 1rem; }
+}
+</style>
+
+
 
 <!-- ***** About Area Starts ***** -->
 <section class="section bg-light" id="about">
