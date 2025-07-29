@@ -143,7 +143,6 @@
 }
 .whatsapp-float:hover { transform: scale(1.1); box-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
 .whatsapp-icon { margin-top: 15px; }
-
 /* ===== Ajuste banner en móviles ===== */
 @media (max-width: 767px) {
   /* Altura controlada del banner */
@@ -152,6 +151,7 @@
     height: auto !important;
     padding: 40px 15px 20px 15px;
     text-align: center;
+    margin-top: 100px !important; /* espacio por header fijo */
   }
 
   /* Texto más pequeño */
@@ -170,18 +170,13 @@
   .main-banner img,
   .hero img {
     width: 100%;
-    height: auto !important;
     max-height: 280px;
+    height: auto !important;
     object-fit: contain !important;
   }
-}/* Elimina el espacio entre el header y el banner */
-header + .main-banner,
-header + .hero {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
 }
 
-/* Asegura que el texto esté visible */
+/* Texto centrado sobre el banner */
 .main-banner .caption,
 .hero .caption {
   position: absolute;
@@ -195,16 +190,29 @@ header + .hero {
 /* Ajusta el tamaño del título */
 .main-banner h1, .hero h1 {
   font-size: 2rem;
-  color: #fff; /* Cambia el color si el fondo es claro */
+  color: #fff;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
-/* Ajusta subtítulo si existe */
+/* Subtítulo */
 .main-banner h2, .hero h2 {
   font-size: 1.2rem;
   color: #fff;
 }
 
+/* Header fijo */
+header, .navbar {
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+}
+
+/* Ajuste de imagen en escritorio */
+.main-banner img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
 
 </style>
 
