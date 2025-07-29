@@ -39,43 +39,37 @@
 </div>
 
 <!-- Encabezado Mejorado -->
+!-- ==== HEADER ==== -->
 <header class="header-area header-sticky shadow-sm">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-12">
-        <nav class="main-nav d-flex justify-content-between align-items-center" role="navigation" aria-label="Menú principal">
+        <nav class="main-nav" role="navigation" aria-label="Menú principal">
 
           <!-- Logo + Nombre -->
-          <div class="logo-container d-flex align-items-center">
-            <a href="index.html" class="logo d-flex align-items-center" aria-label="Ir al inicio">
-              <img src="assets/images/logo_medigo.png"
-                   alt="Logo MEDIGO A CASA 24"
-                   class="logo-img"
-                   width="100" height="100" loading="lazy">
-              <span class="brand-name ms-3">MEDIGO A CASA 24</span>
-            </a>
-          </div>
+          <a href="index.html" class="logo d-flex align-items-center" aria-label="Ir al inicio">
+            <img src="assets/images/logo_medigo.png" alt="Logo MEDIGO A CASA 24" class="logo-img">
+            <span class="brand-name">MEDIGO A CASA 24</span>
+          </a>
+
+          <!-- Botón menú móvil -->
+          <a class="menu-trigger" aria-label="Abrir menú móvil"><span>☰</span></a>
 
           <!-- Menú -->
-          <ul class="nav list-unstyled d-flex m-0">
+          <ul class="nav">
             <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
             <li class="scroll-to-section"><a href="#about">Nosotros</a></li>
             <li class="scroll-to-section"><a href="#services">Servicios</a></li>
             <li class="scroll-to-section"><a href="#equipo">Equipo</a></li>
             <li class="scroll-to-section"><a href="#contacto">Contáctenos</a></li>
+            <li class="header-contact">
+              <a href="https://wa.me/573027125931?text=Hola%20quisiera%20información%20sobre%20sus%20servicios"
+                 class="btn btn-success px-3" target="_blank">
+                <i class="fa fa-whatsapp me-1"></i> WhatsApp
+              </a>
+            </li>
           </ul>
 
-          <!-- Icono WhatsApp -->
-          <div class="header-contact d-none d-lg-block ms-4">
-            <a href="https://wa.me/573027125931?text=Hola%20quisiera%20información%20sobre%20sus%20servicios"
-               class="btn btn-success px-4 py-2" target="_blank"
-               aria-label="Contactar por WhatsApp" title="Contactar por WhatsApp">
-              <i class="fa fa-whatsapp fa-lg me-2"></i> WhatsApp
-            </a>
-          </div>
-
-          <!-- Botón menú móvil -->
-          <a class="menu-trigger" aria-label="Abrir menú móvil"><span>☰</span></a>
         </nav>
       </div>
     </div>
@@ -95,9 +89,10 @@
 
 <!-- Fuente Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
-/* Fondo del bloque de texto principal */
+/* === BLOQUE TEXTO PRINCIPAL === */
 .left-content {
     background: linear-gradient(135deg, #28a745, #6bd98b);
     color: #fff;
@@ -121,7 +116,7 @@
     color: #fff;
 }
 
-/* === Fondo hero profesional === */
+/* === FONDO HERO PROFESIONAL === */
 .hero, .main-banner {
     background: linear-gradient(135deg, #0d6efd, #4d8eff);
     color: #fff;
@@ -137,77 +132,113 @@
     color: #000;
 }
 
-/* Encabezado más compacto */
+<style>
+/* === HEADER LIMPIO Y BLANCO === */
 .header-area {
-  padding: 6px 0;
-  background: #fff;
-  border-bottom: 1px solid #eaeaea;
-  transition: all 0.3s ease-in-out;
-}
-.header-area.header-sticky {
+  background: #ffffff;
+  padding: 8px 0;
   position: sticky;
   top: 0;
   z-index: 9999;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.header-area.header-sticky {
+  top: 0;
 }
 
-/* Logo equilibrado */
+/* Logo */
 .logo-img {
-  max-width: 65px;
-  height: auto;
+  max-height: 50px;
+  margin-right: 10px;
   transition: transform 0.3s ease-in-out;
 }
 .logo-img:hover {
   transform: scale(1.05);
 }
 
-/* Texto de marca más uniforme */
+/* Marca / Nombre del sitio */
 .brand-name {
   font-size: 1.4rem;
   font-weight: 700;
   color: #0d6efd;
   text-transform: uppercase;
   letter-spacing: 1px;
+  white-space: nowrap;
 }
 
-/* Menú más compacto */
+/* Navegación */
 .header-area .nav li a {
-  font-size: 1.1rem;
-  color: #333;
+  font-size: 1rem;
   font-weight: 600;
+  color: #0d6efd;
   padding: 6px 12px;
-  transition: color 0.3s ease, background 0.3s ease;
+  transition: all 0.3s ease;
   border-radius: 6px;
+  text-decoration: none;
 }
 .header-area .nav li a:hover,
 .header-area .nav li a.active {
-  color: #fff;
   background: #0d6efd;
+  color: #fff;
 }
 
-/* Botón WhatsApp equilibrado */
+/* Botón de WhatsApp */
 .header-contact .btn {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 6px;
+  border-radius: 5px;
+  padding: 6px 12px;
+  background: #25d366;
+  color: white;
+  border: none;
+}
+.header-contact .btn:hover {
+  background: #1ebe5d;
 }
 
-/* Responsive */
+/* Menú hamburguesa en móvil */
 .menu-trigger {
-  font-size: 1.5rem;
-  display: none;
+  font-size: 2rem;
+  color: #0d6efd;
   cursor: pointer;
+  display: none;
 }
+
+/* Diseño responsivo */
 @media (max-width: 991px) {
-  .header-contact {
-    display: none;
-  }
   .menu-trigger {
     display: block;
   }
+  .header-contact {
+    display: none;
+  }
+  .header-area .nav {
+    display: none;
+    flex-direction: column;
+    background: #ffffff;
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    padding: 15px;
+  }
+  .header-area .nav li {
+    margin: 12px 0;
+  }
+  .header-area .nav li a {
+    color: #0d6efd;
+    padding: 10px;
+    width: 100%;
+    display: block;
+  }
+  .header-area .nav.show {
+    display: flex;
+  }
 }
 
-/* === Tipografía adaptable === */
+/* === TIPOGRAFÍA ADAPTABLE === */
 h1, .h1 {
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 700;
@@ -229,12 +260,12 @@ p {
     font-size: clamp(0.95rem, 2vw, 1rem);
 }
 
-/* === Secciones === */
+/* === SECCIONES === */
 .section {
     padding: clamp(50px, 10vw, 80px) 0;
 }
 
-/* === Tarjetas (servicios) === */
+/* === TARJETAS (SERVICIOS) === */
 .service-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
@@ -251,7 +282,7 @@ p {
     transform: scale(1.05);
 }
 
-/* === WhatsApp flotante (ajuste en móvil) === */
+/* === WHATSAPP FLOTANTE === */
 .whatsapp-float {
     position: fixed;
     width: 60px;
@@ -275,34 +306,41 @@ p {
     margin-top: 15px;
 }
 
-/* === Menú móvil === */
+/* === MENÚ MÓVIL === */
 @media (max-width: 991px) {
+    .header-contact {
+        display: none;
+    }
+    .menu-trigger {
+        display: block;
+    }
     .header-area .nav {
         display: none;
         flex-direction: column;
         background: #ffffff;
         position: absolute;
-        top: 100%;
-        right: 0;
-        width: 230px;
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-        padding: 20px;
+        top: 70px;
+        right: 10px;
+        width: 200px;
+        border-radius: 5px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        padding: 15px;
     }
     .header-area .nav li {
         margin: 12px 0;
     }
     .header-area .nav li a {
-        font-size: 1.2rem;
+        color: #333;
         padding: 10px;
         width: 100%;
-        text-align: left;
-    }
-    .menu-trigger {
         display: block;
+    }
+    .header-area .nav.show {
+        display: flex;
     }
 }
 
-/* Footer Moderno con mejor contraste */
+/* === FOOTER === */
 .footer {
   background: #0d6efd;
   color: #fff;
@@ -376,7 +414,7 @@ p {
   box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
 }
 
-/* === FIX NAV BAR CORPORATIVA === */
+/* === NAV BAR CORPORATIVA === */
 .header-area .main-nav {
     display: flex !important;
     justify-content: space-between !important;
@@ -396,24 +434,12 @@ p {
 .logo-container .brand-name {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #0d6efd;
+    color: #fff;
     margin-left: 10px;
 }
 .header-area .main-nav .nav {
     display: flex !important;
     gap: 20px;
-}
-.header-area .main-nav .nav li a {
-    color: #333;
-    font-weight: 600;
-    padding: 8px 12px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-.header-area .main-nav .nav li a:hover,
-.header-area .main-nav .nav li a.active {
-    background: #0d6efd;
-    color: #fff;
 }
 .menu-trigger {
     display: none;
@@ -437,7 +463,6 @@ p {
 }
 
 </style>
-
 
 
 <!-- ***** Main Banner Area Start ***** -->
