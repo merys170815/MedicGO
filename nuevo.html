@@ -200,113 +200,6 @@
     color: #25d366; /* verde WhatsApp */
     font-weight: 800;
 }
-
-</style>
-
-<!-- ================= SCRIPT PARA MENÚ ================= -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const menuTrigger = document.querySelector('.menu-trigger');
-    const navMenu = document.querySelector('.header-area .nav');
-
-    menuTrigger.addEventListener('click', function() {
-        navMenu.classList.toggle('show');
-    });
-
-    document.querySelectorAll('.header-area .nav a').forEach(link => {
-        link.addEventListener('click', () => navMenu.classList.remove('show'));
-    });
-});
-</script>
-<!-- ***** Main Banner Area Start ***** -->
-<div id="top" class="main-banner position-relative">
-
-  <!-- Slider -->
-  <div class="Modern-Slider">
-    <!-- Item 1 -->
-    <div class="item">
-      <div class="img-fill">
-        <img src="assets/images/medico1.webp"
-             alt="Médico domiciliario realizando consulta en casa"
-             style="width:100%;height:100%;object-fit:cover;" />
-      </div>
-    </div>
-    <!-- Item 2 -->
-    <div class="item">
-      <div class="img-fill">
-        <img src="assets/images/medico2.webp"
-             alt="Equipo de salud para terapia respiratoria en domicilio"
-             style="width:100%;height:100%;object-fit:cover;" />
-      </div>
-    </div>
-    <!-- Item 3 -->
-    <div class="item">
-      <div class="img-fill">
-        <img src="assets/images/medico3.webp"
-             alt="Servicios médicos y exámenes de laboratorio a domicilio"
-             style="width:100%;height:100%;object-fit:cover;" />
-      </div>
-    </div>
-  </div>
-<!-- Texto superpuesto con overlay -->
-<div class="hero-text text-center">
-  <div class="hero-overlay p-4 rounded-3">
-    <h1 class="fw-bold display-4 text-dark">
-      MEDIGO A CASA 24
-    </h1>
-    <h6 class="mb-4 fs-5 text-dark">
-      Atención médica domiciliaria en Bogotá y Medellín
-    </h6>
-    <div class="main-white-button scroll-to-section">
-      <a href="#contacto" class="btn btn-success px-4 py-2 rounded-pill fw-bold shadow">
-        Solicitar servicio ahora
-      </a>
-    </div>
-  </div>
-</div>
-</div>
-<!-- ***** Main Banner Area End ***** -->
-
-<style>
-/* Hero texto centrado */
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-}
-
-/* Fondo translúcido con desenfoque */
-.hero-overlay {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(5px);
-  border-radius: 12px;
-  display: inline-block;
-}
-
-/* Modern Slider ajuste */
-.Modern-Slider,
-.Modern-Slider .item,
-.Modern-Slider .img-fill {
-  height: 100vh !important;
-  min-height: 500px;
-  position: relative;
-  background: transparent !important;
-}
-.Modern-Slider .img-fill img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block;
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-  .hero-overlay h1 { font-size: 2rem; }
-  .hero-overlay h6 { font-size: 1rem; }
-}
-
 .img-contacto {
   max-width: 250px;
   height: auto;
@@ -392,7 +285,134 @@ document.addEventListener('DOMContentLoaded', function() {
   box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
 }
 
+
 </style>
+
+<!-- ================= SCRIPT PARA MENÚ ================= -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuTrigger = document.querySelector('.menu-trigger');
+    const navMenu = document.querySelector('.header-area .nav');
+
+    menuTrigger.addEventListener('click', function() {
+        navMenu.classList.toggle('show');
+    });
+
+    document.querySelectorAll('.header-area .nav a').forEach(link => {
+        link.addEventListener('click', () => navMenu.classList.remove('show'));
+    });
+});
+</script>
+<!-- ***** Main Banner Area Start ***** -->
+<div id="top" class="main-banner position-relative">
+
+  <!-- Slider -->
+  <div class="Modern-Slider">
+    <!-- Item 1 -->
+    <div class="item">
+      <div class="img-fill">
+        <img src="assets/images/medico1.webp"
+             alt="Médico domiciliario realizando consulta en casa"
+             style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+    <!-- Item 2 -->
+    <div class="item">
+      <div class="img-fill">
+        <img src="assets/images/medico2.webp"
+             alt="Equipo de salud para terapia respiratoria en domicilio"
+             style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+    <!-- Item 3 -->
+    <div class="item">
+      <div class="img-fill">
+        <img src="assets/images/medico3.webp"
+             alt="Servicios médicos y exámenes de laboratorio a domicilio"
+             style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Texto superpuesto -->
+  <div class="hero-text text-center">
+    <h1 class="fw-bold text-white display-4 text-shadow">
+    </h1>
+    <h6 class="mb-4 text-white fs-5 text-shadow">
+    </h6>
+    <div class="main-white-button scroll-to-section">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Texto con fondo -->
+<div class="left-content d-flex flex-column justify-content-center h-100 p-4 text-overlay">
+  <div class="inner-content text-center text-lg-start">
+    <h1 class="fw-bold text-white">MEDIGO A CASA 24</h1>
+    <h6 class="mb-4 text-white">Atención médica domiciliaria en Bogotá y Medellín</h6>
+    <div class="main-white-button scroll-to-section">
+      <a href="https://wa.me/573027125931?text=Hola%20quiero%20información%20sobre%20los%20servicios%20médicos"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="btn btn-light px-4 py-2 rounded-pill fw-bold">
+    Solicitar servicio ahora
+</a>
+    </div>
+  </div>
+</div>
+
+<!-- ***** Main Banner Area End ***** -->
+
+<style>
+/* Hero texto */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  padding: 20px;
+}
+.text-shadow {
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+}
+
+/* Modern Slider ajuste */
+.Modern-Slider,
+.Modern-Slider .item,
+.Modern-Slider .img-fill {
+  height: 100vh !important;
+  min-height: 500px;
+  position: relative;
+}
+.Modern-Slider .img-fill img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .hero-text h1 { font-size: 2rem; }
+  .hero-text h6 { font-size: 1rem; }
+}
+/* Fondo oscuro translúcido para texto */
+.text-overlay {
+  background: rgba(0, 0, 0, 0.5);  /* negro al 50% */
+  border-radius: 10px;
+}
+
+/* Sombra ligera en texto (opcional) */
+.text-overlay h1,
+.text-overlay h6 {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+
+</style>
+
 
 
 <!-- ***** About Area Starts ***** -->
@@ -478,7 +498,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
           </div>
           <div class="card-footer bg-transparent border-0 text-center pb-4">
-            <a href="https://wa.me/573024567890?text=Hola%20quiero%20una%20Consulta%20Médica%20Domiciliaria"
+            <a href="https://wa.me/573027125931?text=Hola%20quiero%20una%20Consulta%20Médica%20Domiciliaria"
                target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
               <i class="fa fa-whatsapp"></i> Solicitar servicio
             </a>
@@ -500,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
           </div>
           <div class="card-footer bg-transparent border-0 text-center pb-4">
-            <a href="https://wa.me/573024567890?text=Hola%20quiero%20una%20Terapia%20Respiratoria"
+            <a href="https://wa.me/573027125931?text=Hola%20quiero%20una%20Terapia%20Respiratoria"
                target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
               <i class="fa fa-whatsapp"></i> Solicitar servicio
             </a>
@@ -522,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
           </div>
           <div class="card-footer bg-transparent border-0 text-center pb-4">
-            <a href="https://wa.me/573024567890?text=Hola%20quiero%20Exámenes%20de%20Laboratorio"
+            <a href="https://wa.me/573027125931?text=Hola%20quiero%20Exámenes%20de%20Laboratorio"
                target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
               <i class="fa fa-whatsapp"></i> Solicitar servicio
             </a>
@@ -544,7 +564,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
           </div>
           <div class="card-footer bg-transparent border-0 text-center pb-4">
-            <a href="https://wa.me/573024567890?text=Hola%20quiero%20una%20Ecografía%20Domiciliaria"
+            <a href="https://wa.me/573027125931?text=Hola%20quiero%20una%20Ecografía%20Domiciliaria"
                target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
               <i class="fa fa-whatsapp"></i> Solicitar servicio
             </a>
@@ -636,7 +656,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <!-- Imagen ilustrativa -->
       <div class="col-lg-6 text-center">
-        <img src="assets/images/contacto.jpg" alt="Contacto médico" class="img-fluid rounded-4 shadow-sm" style="max-width: 400px;">
+       <img src="assets/images/contacto.jpg" alt="Contacto médico" class="img-fluid rounded-4 shadow-sm" style="max-width: 250px; height: auto;">
       </div>
 
     </div>
@@ -662,7 +682,7 @@ document.addEventListener('DOMContentLoaded', function() {
               <span>Terapia</span>
             </a>
           </li>
-        <li class="list-inline-item mx-3">
+         <li class="list-inline-item mx-3">
   <a href="#laboratorio" aria-label="Exámenes de laboratorio">
     <div class="service-icon"><i class="fa fa-flask"></i></div>
     <span>Laboratorio</span>
