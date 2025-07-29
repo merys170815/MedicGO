@@ -248,20 +248,18 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
   </div>
-<!-- Texto superpuesto con overlay -->
+  <!-- Texto superpuesto -->
 <div class="hero-text text-center">
-  <div class="hero-overlay p-4 rounded-3">
-    <h1 class="fw-bold display-4 text-dark">
-      MEDIGO A CASA 24
-    </h1>
-    <h6 class="mb-4 fs-5 text-dark">
-      Atención médica domiciliaria en Bogotá y Medellín
-    </h6>
-    <div class="main-white-button scroll-to-section">
-      <a href="#contacto" class="btn btn-success px-4 py-2 rounded-pill fw-bold shadow">
-        Solicitar servicio ahora
-      </a>
-    </div>
+  <h1 class="fw-bold display-4 text-dark text-shadow-light">
+    MEDIGO A CASA 24
+  </h1>
+  <h6 class="mb-4 fs-5 text-dark text-shadow-light">
+    Atención médica domiciliaria en Bogotá y Medellín
+  </h6>
+  <div class="main-white-button scroll-to-section">
+    <a href="#contacto" class="btn btn-success px-4 py-2 rounded-pill fw-bold shadow">
+      Solicitar servicio ahora
+    </a>
   </div>
 </div>
 </div>
@@ -275,14 +273,12 @@ document.addEventListener('DOMContentLoaded', function() {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 20;
+  padding: 20px;
 }
 
-/* Fondo translúcido con desenfoque */
-.hero-overlay {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(5px);
-  border-radius: 12px;
-  display: inline-block;
+/* Sombra clara (para texto oscuro) */
+.text-shadow-light {
+  text-shadow: 1px 1px 5px rgba(255,255,255,0.7);
 }
 
 /* Modern Slider ajuste */
@@ -292,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
   height: 100vh !important;
   min-height: 500px;
   position: relative;
-  background: transparent !important;
+  background: transparent !important; /* evita fondo negro */
 }
 .Modern-Slider .img-fill img {
   width: 100% !important;
@@ -303,96 +299,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Responsivo */
 @media (max-width: 768px) {
-  .hero-overlay h1 { font-size: 2rem; }
-  .hero-overlay h6 { font-size: 1rem; }
+  .hero-text h1 { font-size: 2rem; }
+  .hero-text h6 { font-size: 1rem; }
 }
-
-.img-contacto {
-  max-width: 250px;
-  height: auto;
-}
-
-/* Footer Moderno con esquema gris */
-.footer-custom {
-  background: #343a40; /* gris oscuro */
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-  border-top: 3px solid #212529; /* gris más oscuro */
-}
-
-.footer-custom .footer-logo {
-  max-width: 160px;
-  transition: transform 0.3s ease-in-out;
-}
-.footer-custom .footer-logo:hover {
-  transform: scale(1.05);
-}
-
-.footer-custom .footer-icon {
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-.footer-custom .footer-icon:hover {
-  color: #ffc107; /* amarillo para resaltar */
-  transform: translateY(-3px);
-}
-
-.footer-custom p,
-.footer-custom small {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #fff !important;
-}
-
-@media (max-width: 991px) {
-  .footer-custom .text-lg-end {
-    text-align: center !important;
-    margin-top: 15px;
-  }
-}
-
-.footer-custom .footer-services li {
-  text-align: center;
-}
-.footer-custom .footer-services a {
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-.footer-custom .footer-services .service-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  margin: 0 auto 8px auto;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-.footer-custom .footer-services span {
-  font-size: 14px;
-  font-weight: 500;
-  display: block;
-}
-.footer-custom .footer-services a:hover .service-icon {
-  background: #6c757d; /* gris medio */
-  transform: scale(1.1);
-}
-.footer-custom .footer-services a:hover span {
-  color: #6c757d; /* gris medio texto */
-}
-
-.hover-shadow {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.hover-shadow:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
-}
-
 </style>
+
 
 
 <!-- ***** About Area Starts ***** -->
