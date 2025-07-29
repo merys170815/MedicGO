@@ -23,176 +23,142 @@
   <link rel="stylesheet" href="assets/css/owl-carousel.css">
   <link rel="stylesheet" href="assets/css/lightbox.css">
   <link rel="icon" type="image/png" href="assets/images/logo_medigo.png">
-
-  <!-- JS -->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/custom.js"></script>
-
-  <style>
-    /* === HEADER LIMPIO Y BLANCO === */
-    .header-area {
-      background: #ffffff;
-      padding: 8px 0;
-      position: sticky;
-      top: 0;
-      z-index: 9999;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .logo-img {
-      max-height: 50px;
-      margin-right: 10px;
-      transition: transform 0.3s ease-in-out;
-    }
-    .logo-img:hover { transform: scale(1.05); }
-    .brand-name {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #0d6efd;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      white-space: nowrap;
-    }
-    .nav { display: flex; list-style: none; margin: 0; padding: 0; }
-    .nav li { list-style: none; }
-    .nav li a {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #0d6efd;
-      padding: 6px 12px;
-      transition: all 0.3s ease;
-      border-radius: 6px;
-      text-decoration: none;
-      display: block;
-    }
-    .nav li a:hover, .nav li a.active {
-      background: #0d6efd;
-      color: #fff;
-    }
-    .header-contact .btn {
-      font-size: 0.95rem;
-      font-weight: 600;
-      border-radius: 5px;
-      padding: 6px 12px;
-      background: #25d366;
-      color: white;
-      border: none;
-    }
-    .header-contact .btn:hover { background: #1ebe5d; }
-    .menu-trigger {
-      font-size: 2rem;
-      color: #0d6efd;
-      cursor: pointer;
-      display: none;
-    }
-    @media (max-width: 991px) {
-      .menu-trigger { display: block; }
-      .header-contact { display: none; }
-      .nav {
-        display: none;
-        flex-direction: column;
-        background: #ffffff;
-        position: absolute;
-        top: 70px;
-        right: 10px;
-        width: 200px;
-        border-radius: 5px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        padding: 15px;
-      }
-      .nav.show { display: flex; }
-      .nav li { margin: 12px 0; }
-    }
-
-    /* HERO */
-    .hero, .main-banner {
-      background: #fff;
-      text-align: center;
-      padding: 50px 20px;
-    }
-    .hero h1 { color: #0d6efd; font-size: 2rem; margin-bottom: 15px; }
-    .hero p { color: #555; font-size: 1rem; }
-
-    /* WHATSAPP FLOTANTE */
-    .whatsapp-float {
-      position: fixed;
-      width: 60px;
-      height: 60px;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #25d366, #128c7e);
-      color: #fff;
-      border-radius: 50%;
-      text-align: center;
-      font-size: 30px;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-      z-index: 999;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-    }
-    .whatsapp-icon { margin-top: 15px; }
-  </style>
 </head>
 
 <body>
-  <!-- Preloader -->
-  <div id="preloader" aria-label="Cargando página">
-    <div class="jumper"><div></div><div></div><div></div></div>
+<!-- Preloader -->
+<div id="preloader">
+  <div class="jumper">
+    <div></div><div></div><div></div>
   </div>
+</div>
 
-  <!-- Encabezado -->
-  <header class="header-area header-sticky shadow-sm">
-    <div class="container">
-      <nav class="main-nav d-flex justify-content-between align-items-center" role="navigation" aria-label="Menú principal">
-        <!-- Logo + Nombre -->
-        <a href="index.html" class="logo d-flex align-items-center" aria-label="Ir al inicio">
-          <img src="assets/images/logo_medigo.png" alt="Logo MEDIGO A CASA 24" class="logo-img">
-          <span class="brand-name">MEDIGO A CASA 24</span>
-        </a>
-        <!-- Botón menú móvil -->
-        <span class="menu-trigger" aria-label="Abrir menú móvil">☰</span>
-        <!-- Menú -->
-        <ul class="nav">
-          <li><a href="#top" class="active">Inicio</a></li>
-          <li><a href="#about">Nosotros</a></li>
-          <li><a href="#services">Servicios</a></li>
-          <li><a href="#equipo">Equipo</a></li>
-          <li><a href="#contacto">Contáctenos</a></li>
-          <li class="header-contact">
-            <a href="https://wa.me/573027125931?text=Hola%20quisiera%20información%20sobre%20sus%20servicios"
-               class="btn btn-success px-3" target="_blank">
-              <i class="fa fa-whatsapp me-1"></i> WhatsApp
-            </a>
-          </li>
-        </ul>
-      </nav>
+<!-- ==== HEADER ==== -->
+<header class="header-area header-sticky shadow-sm">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12">
+        <nav class="main-nav" role="navigation" aria-label="Menú principal">
+
+          <!-- Logo + Nombre -->
+          <a href="index.html" class="logo d-flex align-items-center">
+            <img src="assets/images/logo_medigo.png" alt="Logo MEDIGO A CASA 24" class="logo-img">
+            <span class="brand-name">MEDIGO A CASA 24</span>
+          </a>
+
+          <!-- Botón menú móvil -->
+          <a class="menu-trigger" aria-label="Abrir menú móvil"><span>☰</span></a>
+
+          <!-- Menú -->
+          <ul class="nav">
+            <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
+            <li class="scroll-to-section"><a href="#about">Nosotros</a></li>
+            <li class="scroll-to-section"><a href="#services">Servicios</a></li>
+            <li class="scroll-to-section"><a href="#equipo">Equipo</a></li>
+            <li class="scroll-to-section"><a href="#contacto">Contáctenos</a></li>
+            <li class="header-contact">
+              <a href="https://wa.me/573027125931?text=Hola%20quisiera%20información%20sobre%20sus%20servicios"
+                 class="btn btn-success px-3" target="_blank">
+                <i class="fa fa-whatsapp me-1"></i> WhatsApp
+              </a>
+            </li>
+          </ul>
+
+        </nav>
+      </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- HERO -->
-
-  <!-- Botón flotante de WhatsApp -->
-  <a href="https://wa.me/573027125931?text=Hola%20quiero%20información%20sobre%20los%20servicios%20médicos"
-     class="whatsapp-float" target="_blank" aria-label="Chat por WhatsApp">
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/573027125931?text=Hola%20quiero%20información%20sobre%20los%20servicios%20médicos"
+   class="whatsapp-float" target="_blank">
     <i class="fa fa-whatsapp whatsapp-icon"></i>
-  </a>
+</a>
 
- <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const menuTrigger = document.querySelector(".menu-trigger");
-    const navMenu = document.querySelector(".header-area .nav");
+<!-- ================= ESTILOS ================= -->
+<style>
+/* HEADER LIMPIO */
+.header-area {
+  background: #ffffff;
+  padding: 8px 0;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.logo-img { max-height: 50px; margin-right: 10px; transition: transform 0.3s ease-in-out; }
+.logo-img:hover { transform: scale(1.05); }
+.brand-name { font-size: 1.4rem; font-weight: 700; color: #0d6efd; text-transform: uppercase; }
 
-    if (menuTrigger) {
-      menuTrigger.addEventListener("click", function() {
-        navMenu.classList.toggle("show");
-      });
-    }
-  });
+/* NAV */
+.header-area .nav li a { font-size: 1rem; font-weight: 600; color: #0d6efd; padding: 6px 12px; border-radius: 6px; text-decoration: none; }
+.header-area .nav li a:hover, .header-area .nav li a.active { background: #0d6efd; color: #fff; }
+
+/* BOTÓN WHATSAPP HEADER */
+.header-contact .btn { font-size: 0.95rem; font-weight: 600; border-radius: 5px; padding: 6px 12px; background: #25d366; color: white; border: none; }
+.header-contact .btn:hover { background: #1ebe5d; }
+
+/* BOTÓN MENU MÓVIL */
+.menu-trigger { font-size: 2rem; color: #0d6efd; cursor: pointer; display: none; }
+
+/* RESPONSIVE NAV */
+@media (max-width: 991px) {
+  .menu-trigger { display: block; }
+  .header-contact { display: none; }
+  .header-area .nav {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    padding: 15px;
+  }
+  .header-area .nav li { margin: 12px 0; }
+  .header-area .nav li a { color: #0d6efd; padding: 10px; width: 100%; display: block; }
+  .header-area .nav.show { display: flex; }
+}
+
+/* BOTÓN WHATSAPP FLOTANTE */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 999;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.whatsapp-float:hover { transform: scale(1.1); box-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+.whatsapp-icon { margin-top: 15px; }
+</style>
+
+<!-- ================= SCRIPT PARA MENÚ ================= -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuTrigger = document.querySelector('.menu-trigger');
+    const navMenu = document.querySelector('.header-area .nav');
+
+    menuTrigger.addEventListener('click', function() {
+        navMenu.classList.toggle('show');
+    });
+
+    // Cierra menú al hacer clic en un enlace
+    document.querySelectorAll('.header-area .nav a').forEach(link => {
+        link.addEventListener('click', () => navMenu.classList.remove('show'));
+    });
+});
 </script>
-
 
 <!-- ***** Main Banner Area Start ***** -->
 <div id="top">
