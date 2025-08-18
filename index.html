@@ -81,22 +81,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   gtag('config', 'AW-16955964314');
 </script>
- <!-- Script obligatorio de ClickGuard -->
-<script defer type="application/javascript" src="https://pulse.clickguard.com/s/accELIJR7rBrk/astdPfDXeOKdD"></script>
-<script defer type="application/javascript" src="https://pulse.clickguard.com/sc"></script>
-
-<!-- Script de conversión para todos los clics en WhatsApp (MeDigo) -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("a[href*='wa.me'], a[href*='api.whatsapp.com']").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        if (typeof CG !== "undefined" && CG.conversion) {
-          CG.conversion("WhatsApp click - MeDigo", 0);
-        }
-      });
-    });
-  });
-</script>
 </head>
 
 
