@@ -306,15 +306,24 @@ body { padding-top: 70px; }
   padding-top: 0 !important;
 }
 /* Imagen del slider */
-..banner-full-img {
-  width: 100%;
-  height: 500px;          /* altura fija */
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  background-color: #000; /* o blanco, para rellenar el espacio sobrante */
+/* ==============================
+   BANNER / PORTADA
+   ============================== */
+.main-banner {
+  position: relative;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
+/* Imagen del slider */
+.banner-full-img {
+  width: 100%;
+  height: 500px;          /* altura fija */
+  object-fit: contain;    /* muestra toda la imagen */
+  object-position: center;
+  display: block;
+  background-color: #fff; /* relleno en caso de espacios */
+}
 
 /* Ajuste responsive */
 @media (max-width: 991px) {
@@ -329,7 +338,6 @@ body { padding-top: 70px; }
   }
 }
 
-
 /* Texto sobre el banner */
 .hero-text {
   position: absolute;
@@ -340,16 +348,32 @@ body { padding-top: 70px; }
   padding: 20px 30px;
   text-align: center;
 }
+
 .text-overlay {
   background: rgba(0, 0, 0, 0.55);
   border-radius: 10px;
   padding: 20px;
 }
+
 .text-overlay h1,
 .text-overlay h6 {
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
   margin: 0;
+}
+
+/* Ajuste del carrusel para que muestre solo una imagen */
+.carousel-item,
+.owl-item,
+.swiper-slide {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+}
+
+.carousel-inner,
+.owl-stage,
+.swiper-wrapper {
+  overflow: hidden !important;
 }
 
 /* ==============================
@@ -470,16 +494,6 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
 
     </div>
-
-    <!-- Controles -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-      <span class="visually-hidden">Siguiente</span>
-    </button>
 
     <!-- Indicadores -->
     <div class="carousel-indicators">
