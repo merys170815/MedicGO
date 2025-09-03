@@ -273,7 +273,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
 <!-- ***** Main Banner Slider Full Width Start ***** -->
 <div id="top" class="main-banner position-relative">
   <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
@@ -325,48 +324,44 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <!-- ***** Main Banner Slider Full Width End ***** -->
 
-
 <!-- ====== CSS Optimizado Banner ====== -->
 <style>
 /* ---------------- Banner ---------------- */
 .main-banner {
   width: 100%;
-  min-height: 70vh;
+  height: 100vh;
   display: flex;
-  align-items: center;       /* centra verticalmente la imagen */
+  align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin: 0;                 /* elimina espacios extra */
-  padding: 0;                /* elimina padding */
+  margin: 0;
+  padding: 0;
 }
 
 .banner-full-img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;         /* cubre todo el contenedor sin deformar */
+  object-fit: cover;
   object-position: center center;
   background-color: #fff;
+  transition: transform 0.5s ease;
 }
 
-/* Ajustes para navbar fija */
-body { padding-top: 0; }     /* eliminamos padding extra que genera espacio */
-
-/* Responsive */
-@media (max-width: 991px) {
-  .main-banner { min-height: 70vh; }
+body {
+  padding-top: 0;
+  margin: 0;
 }
 
+/* Escalar imagen en móviles */
 @media (max-width: 768px) {
-  .main-banner { min-height: 90vh; }
-  .banner-full-img { object-fit: cover; }
-}
-
-@media (max-width: 576px) {
-  .main-banner { min-height: 80vh; }
-  .banner-full-img { object-fit: cover; }
+  .banner-full-img {
+    transform: scale(1.2);
+    object-position: top center;
+  }
 }
 </style>
+
 
 <!-- Script personalizado para el menú -->
 <script>
