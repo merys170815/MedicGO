@@ -440,7 +440,7 @@ body { padding-top: 70px; }
   transform: translateY(-5px);
   box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
 }
-  /* ==============================
+ /* ==============================
    AJUSTE SOBRE NOSOTROS EN CELULAR
    ============================== */
 @media (max-width: 768px) {
@@ -449,24 +449,46 @@ body { padding-top: 70px; }
   }
 
   #about .stats-box {
-    position: relative !important; /* evita que se monte encima */
-    bottom: auto;
-    left: auto;
-    transform: none;
-    margin: 15px auto 0; /* lo centra y separa */
-    max-width: 90%;
+    position: relative !important; /* quita la posición absoluta */
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    margin: 20px auto 0; /* centrado con separación */
+    max-width: 95%;
     text-align: center;
+    z-index: 0; /* asegura que quede debajo */
   }
 
   #about .stats-box h4 {
-    font-size: 1.2rem; /* texto más pequeño en móvil */
+    font-size: 1.1rem; /* ajusta tamaño de texto */
   }
 
   #about .stats-box p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 }
 
+/* ==============================
+   TIMELINE
+   ============================== */
+.timeline li {
+  position: relative;
+  padding-left: 40px;
+}
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #0d6efd;
+}
+.timeline li:last-child::before {
+  height: 20px;
+}
 
 </style>
 
@@ -748,6 +770,8 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 </section>
+
+
 <!-- ***** Sobre Nosotros ***** -->
 <section id="about" class="py-5 bg-light position-relative">
   <div class="container">
@@ -819,25 +843,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
-<!-- Estilos extra para la línea de tiempo -->
-<style>
-  .timeline li {
-    position: relative;
-    padding-left: 40px;
-  }
-  .timeline li::before {
-    content: '';
-    position: absolute;
-    left: 15px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #0d6efd;
-  }
-  .timeline li:last-child::before {
-    height: 20px;
-  }
-</style>
+
 <!-- ***** Fin Sobre Nosotros ***** -->
 
 
