@@ -306,6 +306,7 @@ body { padding-top: 70px; }
 }
 /* Imagen del slider */
 /* ==============================
+
    BANNER / PORTADA
    ============================== */
 .main-banner {
@@ -314,33 +315,36 @@ body { padding-top: 70px; }
   padding-top: 0 !important;
 }
 
-/* Imagen del slider */
+/* Imagen del slider más alta */
 .banner-full-img {
   width: 100%;
-  height: 500px;          /* altura fija */
-  object-fit: contain;    /* muestra toda la imagen */
-  object-position: center;
+  height: 800px;              /* altura mayor para escritorio */
+  object-fit: contain;         /* toda la imagen se muestra sin recorte */
+  object-position: center top; /* centra horizontalmente y muestra arriba */
   display: block;
-  background-color: #fff; /* relleno en caso de espacios */
+  background-color: #fff;
 }
 
 /* Ajuste responsive */
 @media (max-width: 991px) {
   .banner-full-img {
-    height: 400px;   /* tablets */
+    height: 600px;
+    object-position: center top;
   }
 }
 
 @media (max-width: 576px) {
   .banner-full-img {
-    height: 250px;   /* móviles */
+    height: 400px;
+    object-position: center top;
   }
 }
 
 /* Texto sobre el banner */
 .hero-text {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;   /* mantiene centrado */
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 20;
   max-width: 90%;
@@ -361,7 +365,7 @@ body { padding-top: 70px; }
   margin: 0;
 }
 
-/* Ajuste del carrusel para que muestre solo una imagen */
+/* Ajuste del carrusel */
 .carousel-item,
 .owl-item,
 .swiper-slide {
