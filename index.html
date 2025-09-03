@@ -314,31 +314,35 @@ body { padding-top: 70px; }
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
-
 /* Imagen del slider más alta */
 .banner-full-img {
   width: 100%;
-  height: 800px;              /* altura mayor para escritorio */
-  object-fit: contain;         /* toda la imagen se muestra sin recorte */
-  object-position: center top; /* centra horizontalmente y muestra arriba */
+  height: auto;              /* altura automática según la imagen */
+  max-height: 800px;         /* limita altura en escritorio */
+  object-fit: contain;       /* no recorta nada */
+  object-position: center top;
   display: block;
   background-color: #fff;
 }
 
-/* Ajuste responsive */
 @media (max-width: 991px) {
   .banner-full-img {
-    height: 600px;
+    max-height: 600px;
+    height: auto;
+    object-fit: contain;
     object-position: center top;
   }
 }
 
 @media (max-width: 576px) {
   .banner-full-img {
-    height: 700px;
+    max-height: 500px;
+    height: auto;
+    object-fit: contain;
     object-position: center top;
   }
 }
+
 
 /* Texto sobre el banner */
 .hero-text {
@@ -508,14 +512,16 @@ body { padding-top: 70px; }
     font-size: 0.8rem; /* texto más pequeño */
   }
 }
-
 @media (max-width: 576px) {
-  /* Ajuste para móviles muy pequeños */
-  #about .stats-box {
-    max-width: 180px;
-    margin: 35px auto 0; /* separa un poco más */
-    padding: 8px 10px;
+  .banner-full-img {
+    width: 100%;
+    height: auto;           /* mantiene proporción */
+    max-height: none;       /* quita límite de altura */
+    object-fit: contain;    /* muestra toda la imagen sin recorte */
+    object-position: center top;
   }
+}
+
 
   #about .stats-box h4 {
     font-size: 0.95rem;
