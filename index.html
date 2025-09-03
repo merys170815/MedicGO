@@ -489,6 +489,64 @@ body { padding-top: 70px; }
 .timeline li:last-child::before {
   height: 20px;
 }
+/* IMAGE WRAPPER: desktop overlay + mobile stacked */
+.image-wrapper { position: relative; display: block; }
+
+.main-about-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Insignia: overlay en desktop */
+.stats-box {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 20;
+  background: rgba(13,110,253,0.95); /* azul sólido semi-opaco */
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  max-width: 260px;
+}
+
+/* Ajustes tipográficos dentro de la insignia */
+.stats-box h4 { margin: 0 0 4px; font-size: 1rem; line-height: 1.05; }
+.stats-box p { margin: 0; opacity: 0.95; font-size: 0.85rem; }
+
+/* =========== MOBILE: quitar overlay y apilar =========== */
+@media (max-width: 768px) {
+  /* Forzar que el wrapper se comporte en columna */
+  .image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Anular absolutamente cualquier positioning antiguo */
+  .image-wrapper .stats-box {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin: 12px 0 0;
+    width: 100%;
+    max-width: 540px;
+    text-align: center;
+    z-index: auto !important;
+  }
+
+  /* Hacer la imagen más compacta en móvil (si quieres) */
+  .main-about-img { max-height: 360px; object-fit: cover; width: 100%; }
+
+  /* Reduce texto de insignia en móvil */
+  .stats-box h4 { font-size: 1rem; }
+  .stats-box p { font-size: 0.8rem; }
+}
 
 </style>
 
@@ -770,8 +828,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 </section>
-
-
 <!-- ***** Sobre Nosotros ***** -->
 <section id="about" class="py-5 bg-light position-relative">
   <div class="container">
@@ -843,10 +899,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
-
 <!-- ***** Fin Sobre Nosotros ***** -->
-
-
 
 <!-- ***** Cobertura geográfica ***** -->
 <section class="section py-5" id="cobertura">
@@ -1066,6 +1119,23 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 500);
     });
   });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.innerWidth <= 768) {
+    var stats = document.querySelector('.image-wrapper .stats-box');
+    if (stats) {
+      // fuerza estilo mobile si aún está absolute
+      stats.style.position = 'static';
+      stats.style.top = '';
+      stats.style.left = '';
+      stats.style.right = '';
+      stats.style.transform = 'none';
+      stats.style.marginTop = '12px';
+      stats.style.width = '100%';
+    }
+  }
+});
 </script>
 
   </body>
