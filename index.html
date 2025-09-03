@@ -314,21 +314,32 @@ body { padding-top: 70px; }
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
-/* Imagen del slider más alta */
+/* ==============================
+/* ==============================
+   BANNER / PORTADA
+   ============================== */
+.main-banner {
+  position: relative;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Imagen del slider que nunca se corta */
 .banner-full-img {
   width: 100%;
-  height: auto;              /* altura automática según la imagen */
-  max-height: 800px;         /* limita altura en escritorio */
-  object-fit: contain;       /* no recorta nada */
+  height: auto;             /* altura automática según la imagen */
+  max-width: 100%;
+  object-fit: contain;      /* muestra toda la imagen sin recorte */
   object-position: center top;
   display: block;
   background-color: #fff;
 }
 
+/* Ajuste responsive */
 @media (max-width: 991px) {
   .banner-full-img {
-    max-height: 600px;
     height: auto;
+    width: 100%;
     object-fit: contain;
     object-position: center top;
   }
@@ -336,18 +347,17 @@ body { padding-top: 70px; }
 
 @media (max-width: 576px) {
   .banner-full-img {
-    max-height: 500px;
     height: auto;
+    width: 100%;
     object-fit: contain;
     object-position: center top;
   }
 }
 
-
 /* Texto sobre el banner */
 .hero-text {
   position: absolute;
-  top: 50%;   /* mantiene centrado */
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 20;
@@ -368,6 +378,7 @@ body { padding-top: 70px; }
   text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
   margin: 0;
 }
+
 
 /* Ajuste del carrusel */
 .carousel-item,
