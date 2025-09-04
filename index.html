@@ -261,39 +261,6 @@ body { padding-top: 70px; margin: 0; }
 .hover-shadow { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .hover-shadow:hover { transform: translateY(-5px); box-shadow: 0 1rem 2rem rgba(0,0,0,0.15); }
 
-/* ==============================
-   BANNER FULL WIDTH
-   ============================== */
-.main-banner {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  min-height: 400px; /* evita que se vea vacío en móviles lentos */
-}
-
-.banner-full-img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center center;
-  background-color: #fff;
-  transition: transform 0.5s ease;
-}
-
-/* Escalar imagen en móviles */
-@media (max-width: 768px) {
-  .banner-full-img {
-    transform: scale(1.15);
-    object-position: top center;
-  }
-  .main-banner { height: 80vh; } /* menos alto en móviles */
-}
 </style>
 
 <!-- ================= SCRIPT PARA MENÚ ================= -->
@@ -317,55 +284,36 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-<!-- ***** Main Banner Slider Full Width Start ***** -->
-<div id="top" class="main-banner position-relative">
-  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
-    <div class="carousel-inner">
-
-      <!-- Slide 1 (optimizado con prioridad) -->
-      <div class="carousel-item active">
-        <picture>
-          <!-- Versión ligera para móviles -->
-          <source srcset="assets/images/doctor14.480.webp" media="(max-width: 768px)" type="image/webp">
-          <!-- Versión para pantallas grandes -->
-          <source srcset="assets/images/doctor14.480.webp" type="image/webp">
-          <img src="assets/images/doctor14.480.webp"
-               alt="Médico a domicilio en Bogotá"
-               class="d-block w-100 banner-full-img"
-               loading="eager"
-               fetchpriority="high"
-               width="1920"
-               height="1080">
-        </picture>
-
-      </div>
-
-    </div>
-
-    <!-- Indicadores -->
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-    </div>
-
-  </div>
+<!-- ***** Main Banner Optimizado ***** -->
+<div id="top" class="main-banner">
+  <picture>
+    <!-- Versión ligera para móviles -->
+    <source srcset="assets/images/doctor14.480.webp" media="(max-width: 768px)" type="image/webp">
+    <!-- Versión para pantallas grandes -->
+    <source srcset="assets/images/doctor14.webp" type="image/webp">
+    <img src="assets/images/doctor14.webp"
+         alt="Médico a domicilio en Bogotá"
+         class="banner-full-img"
+         loading="eager"
+         fetchpriority="high"
+         width="1920"
+         height="1080">
+  </picture>
 </div>
-<!-- ***** Main Banner Slider Full Width End ***** -->
 
 <!-- ====== CSS Optimizado Banner ====== -->
 <style>
-/* ---------------- Banner ---------------- */
 .main-banner {
   width: 100%;
-  height: 100vh;
+  height: 60vh;         /* menor que 100vh para acelerar LCP */
+  min-height: 300px;    /* evita espacio vacío en móviles lentos */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   margin: 0;
   padding: 0;
+  background-color: #fff; /* color de fondo mientras carga la imagen */
 }
 
 .banner-full-img {
@@ -374,24 +322,14 @@ document.addEventListener('DOMContentLoaded', function() {
   display: block;
   object-fit: cover;
   object-position: center center;
-  background-color: #fff;
-  transition: transform 0.5s ease;
 }
 
-body {
-  padding-top: 0;
-  margin: 0;
-}
-
-/* Escalar imagen en móviles */
+/* Ajuste para móviles */
 @media (max-width: 768px) {
-  .banner-full-img {
-    transform: scale(1.2);
-    object-position: top center;
-  }
+  .main-banner { height: 50vh; min-height: 250px; }
+  .banner-full-img { object-position: top center; }
 }
 </style>
-
 
 <!-- Script personalizado para el menú -->
 <script>
