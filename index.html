@@ -316,21 +316,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
 <!-- ***** Main Banner Slider Full Width Start ***** -->
 <div id="top" class="main-banner position-relative">
   <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
     <div class="carousel-inner">
-<picture>
-  <source srcset="assets/images/doctor14.480.webp" media="(max-width: 480px)" type="image/webp">
-  <img src="assets/images/doctor14.webp"
-       alt="Médico a domicilio en Bogotá"
-       class="d-block w-100 banner-full-img"
-       fetchpriority="high"
-       width="1600"
-       height="900">
-</picture>
 
+      <!-- Slide 1 (optimizado con prioridad) -->
+      <div class="carousel-item active">
+        <picture>
+          <!-- Versión ligera para móviles -->
+          <source srcset="assets/images/doctor14.480.webp" media="(max-width: 768px)" type="image/webp">
+          <!-- Versión para pantallas grandes -->
+          <source srcset="assets/images/doctor14.480.webp" type="image/webp">
+          <img src="assets/images/doctor14.480.webp"
+               alt="Médico a domicilio en Bogotá"
+               class="d-block w-100 banner-full-img"
+               loading="eager"
+               fetchpriority="high"
+               width="1920"
+               height="1080">
+        </picture>
+      </div>
 
       <!-- Slide 2 (lazy load) -->
       <div class="carousel-item">
@@ -370,7 +376,6 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 <!-- ***** Main Banner Slider Full Width End ***** -->
-
 
 <!-- ====== CSS Optimizado Banner ====== -->
 <style>
