@@ -61,9 +61,11 @@
 <link rel="alternate" hreflang="es-CO" href="https://medigoencasa.com/" />
 <link rel="alternate" hreflang="es" href="https://medigoencasa.com/" /> <!-- versión general en español -->
 <link rel="alternate" hreflang="x-default" href="https://medigoencasa.com/" /> <!-- versión por defecto global -->
+<!-- Preload de la imagen principal del banner -->
+<link rel="preload" as="image" href="assets/images/doctor14.webp" type="image/webp" media="(min-width: 481px)">
+<link rel="preload" as="image" href="assets/images/doctor14-480.webp" type="image/webp" media="(max-width: 480px)">
 
-<!-- Preload de la primera imagen del banner -->
-<link rel="preload" as="image" href="assets/images/doctor14.webp" fetchpriority="high">
+
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -315,27 +317,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
 <!-- ***** Main Banner Slider Full Width Start ***** -->
 <div id="top" class="main-banner position-relative">
   <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
     <div class="carousel-inner">
+<picture>
+  <source srcset="assets/images/doctor14-480.webp" media="(max-width: 480px)" type="image/webp">
+  <img src="assets/images/doctor14.webp"
+       alt="Médico a domicilio en Bogotá"
+       class="d-block w-100 banner-full-img"
+       fetchpriority="high"
+       width="1600"
+       height="900">
+</picture>
 
-      <!-- Slide 1 (optimizado con prioridad) -->
-      <div class="carousel-item active">
-        <picture>
-          <!-- Versión ligera para móviles -->
-          <source srcset="assets/images/doctor14.webp" media="(max-width: 768px)" type="image/webp">
-          <!-- Versión para pantallas grandes -->
-          <source srcset="assets/images/doctor14.webp" type="image/webp">
-          <img src="assets/images/doctor14.webp"
-               alt="Médico a domicilio en Bogotá"
-               class="d-block w-100 banner-full-img"
-               loading="eager"
-               fetchpriority="high"
-               width="1920"
-               height="1080">
-        </picture>
-      </div>
 
       <!-- Slide 2 (lazy load) -->
       <div class="carousel-item">
