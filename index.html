@@ -876,31 +876,48 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Servicios rápidos -->
       <div class="col-lg-12 mb-4">
         <ul class="list-inline footer-services">
-          <li class="list-inline-item mx-3"><a href="#consulta" aria-label="Ir a consulta médica"><div class="service-icon"><i class="fa fa-user-md" aria-hidden="true"></i></div><span>Consulta</span></a></li>
-          <li class="list-inline-item mx-3"><a href="#terapia" aria-label="Ir a terapia respiratoria"><div class="service-icon"><i class="fa fa-stethoscope" aria-hidden="true"></i></div><span>Terapia</span></a></li>
-          <li class="list-inline-item mx-3"><a href="#laboratorio" aria-label="Ir a exámenes de laboratorio"><div class="service-icon"><i class="fa fa-flask" aria-hidden="true"></i></div><span>Laboratorio</span></a></li>
-          <li class="list-inline-item mx-3"><a href="#ecografia" aria-label="Ir a ecografía a domicilio"><div class="service-icon"><i class="fa fa-heartbeat" aria-hidden="true"></i></div><span>Ecografía</span></a></li>
+          <li class="list-inline-item mx-3">
+            <a href="#consulta" aria-label="Ir a consulta médica">
+              <div class="service-icon"><i class="fa fa-user-md"></i></div>
+              <span>Consulta</span>
+            </a>
+          </li>
+          <li class="list-inline-item mx-3">
+            <a href="#terapia" aria-label="Ir a terapia respiratoria">
+              <div class="service-icon"><i class="fa fa-stethoscope"></i></div>
+              <span>Terapia</span>
+            </a>
+          </li>
+          <li class="list-inline-item mx-3">
+            <a href="#laboratorio" aria-label="Ir a exámenes de laboratorio">
+              <div class="service-icon"><i class="fa fa-flask"></i></div>
+              <span>Laboratorio</span>
+            </a>
+          </li>
+          <li class="list-inline-item mx-3">
+            <a href="#ecografia" aria-label="Ir a ecografía a domicilio">
+              <div class="service-icon"><i class="fa fa-heartbeat"></i></div>
+              <span>Ecografía</span>
+            </a>
+          </li>
         </ul>
       </div>
 
-     <!-- Logo centrado -->
-<div class="col-lg-12 mb-4">
-  <a href="index.html" aria-label="Ir al inicio">
-    <img src="assets/images/logo_medigo.png" alt="Logo MEDIGO A CASA 24" class="footer-logo">
-  </a>
-</div>
-
-<style>
-/* Ajuste del logo en el footer */
-.footer-logo {
-  max-width: 120px; /* tamaño más pequeño */
-  width: 100%;      /* responsive */
-  height: auto;     /* mantiene proporción */
-  display: inline-block;
-}
-
-</style>
-
+      <!-- Logo centrado -->
+      <div class="col-lg-12 mb-4">
+        <a href="index.html" aria-label="Ir al inicio">
+          <img src="assets/images/logo_medigo.png" alt="Logo MEDIGO A CASA 24" class="footer-logo">
+        </a>
+      </div>
+ <style>
+        /* Ajuste del logo en el footer */
+        .footer-logo {
+          max-width: 120px;
+          width: 100%;
+          height: auto;
+          display: inline-block;
+        }
+      </style>
 
       <!-- Derechos -->
       <div class="col-lg-12">
@@ -914,13 +931,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </footer>
 <!-- ***** Fin Footer ***** -->
 
-<!-- Bootstrap JS -->
+<!-- 1. jQuery (debe ir primero porque muchos plugins lo usan) -->
+<script src="assets/js/jquery-2.1.0.min.js"></script>
+
+<!-- 2. Bootstrap (bundle incluye Popper) -->
 <script src="assets/js/bootstrap.bundle.min.js" defer></script>
 
-<!-- Plugins -->
-<script src="assets/js/owl.carousel.min.js" defer></script>
-<script src="assets/js/wow.min.js" defer></script>
-<script src="assets/js/custom.js" defer></script>
+
 
 <!-- ***** Scripts (deduplicados) ***** -->
 <script src="assets/js/jquery-2.1.0.min.js" defer></script>
@@ -937,8 +954,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="assets/js/lightbox.js" defer></script>
 <script src="assets/js/isotope.js" defer></script>
 <script src="assets/js/custom.js" defer></script>
+!-- 4. Script personalizado -->
+<script src="assets/js/custom.js" defer></script>
 
-
+<!-- ***** Scripts inline ***** -->
 <script>
   // Filtro de portfolio (si aplica)
   $(function() {
@@ -954,23 +973,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 </script>
+
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  if (window.innerWidth <= 768) {
-    var stats = document.querySelector('.image-wrapper .stats-box');
-    if (stats) {
-      // fuerza estilo mobile si aún está absolute
-      stats.style.position = 'static';
-      stats.style.top = '';
-      stats.style.left = '';
-      stats.style.right = '';
-      stats.style.transform = 'none';
-      stats.style.marginTop = '12px';
-      stats.style.width = '100%';
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.innerWidth <= 768) {
+      var stats = document.querySelector('.image-wrapper .stats-box');
+      if (stats) {
+        stats.style.position = 'static';
+        stats.style.top = '';
+        stats.style.left = '';
+        stats.style.right = '';
+        stats.style.transform = 'none';
+        stats.style.marginTop = '12px';
+        stats.style.width = '100%';
+      }
     }
-  }
-});
+  });
 </script>
 
-  </body>
+</body>
 </html>
