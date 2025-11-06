@@ -945,6 +945,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    onclick="gtag('event', 'conversion', {'send_to': 'AW-16955964314/ZDNACIvstrUaEJr3nZU_'});">
    <i class="bi bi-whatsapp"></i>
 </a>
+
+<script>
+document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+  link.addEventListener('click', function(event) {
+    event.preventDefault(); // Previene que el enlace se abra instantáneamente
+    var url = this.href;
+    // Enviar conversión a Google Ads
+    gtag('event', 'conversion', {
+      'send_to': 'AW-6955964341/2R8GCITk7bobEJr3nZU_',
+      'event_callback': function() {
+        // Una vez se envía la conversión, abre WhatsApp
+        window.open(url, '_blank');
+      }
+    });
+    // Si el envío demora más de 1 segundo, igual abrimos WhatsApp
+    setTimeout(function() {
+      window.open(url, '_blank');
+    }, 1000);
+  });
+});
+</script>
+
 </body>
 </html>
 
