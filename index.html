@@ -936,33 +936,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </footer>
+<!-- ✅ BOTÓN WHATSAPP FIXED -->
 <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios."
    id="whatsapp-button"
    class="d-flex align-items-center justify-content-center"
    target="_blank"
-   aria-label="Agendar consulta por WhatsApp">
+   aria-label="Agendar consulta por WhatsApp"
+   onclick="gtag('event', 'conversion', {'send_to': 'AW-16955964314/ZDNACIvstrUaEJr3nZU_'});">
    <i class="bi bi-whatsapp"></i>
 </a>
-
-<script>
-document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
-  link.addEventListener('click', function(event) {
-    event.preventDefault();
-    var url = this.href;
-    gtag('event', 'conversion', {
-      'send_to': 'AW-6955964341/2R8GCITk7bobEJr3nZU_',
-      'event_callback': function() {
-        window.open(url, '_blank');
-      }
-    });
-    setTimeout(function() {
-      window.open(url, '_blank');
-    }, 1000);
-  });
-});
-</script>
-
-
 </body>
 </html>
 
