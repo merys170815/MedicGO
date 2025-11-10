@@ -148,7 +148,8 @@
     </div>
 
 
-<<style>
+<style>
+
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap');
 
   body {
@@ -853,6 +854,8 @@
     transform: translateY(-4px);
   }
 </style>
+
+
 <!-- =======================================
      ✅ FOOTER PROFESIONAL Y LIMPIO
 ======================================= -->
@@ -1014,10 +1017,10 @@
     }
 
     navigator.sendBeacon(
-      "https://clikguardian.onrender.com/track",
-      new Blob([JSON.stringify(body)], { type: "application/json" })
-    );
-  }
+  "https://merys-proxy.vercel.app/api/track",
+  new Blob([JSON.stringify(body)], { type: "application/json" })
+);
+
 
   // Evento: llegada al sitio
   send("land");
