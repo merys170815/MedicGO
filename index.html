@@ -40,35 +40,91 @@
   <meta name="twitter:image" content="https://www.medigoencas.com/assets/img/og-cover.jpg">
 
   <!-- ✅ Datos estructurados JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": "Medigo en Casa",
+  "url": "https://www.medigoencas.com/",
+  "image": "https://www.medigoencas.com/assets/img/og-cover.jpg",
+  "logo": "https://www.medigoencas.com/assets/img/logo_medigo.png",
+  "description": "Médico a domicilio en Bogotá y Medellín 24/7. Consulta médica general, terapias, laboratorio y atención urgente.",
+  "telephone": "+573115081075",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bogotá",
+    "addressRegion": "Cundinamarca",
+    "addressCountry": "CO"
+  },
+  "areaServed": ["Bogotá", "Medellín"],
+  "medicalSpecialty": [
+    "PrimaryCare",
+    "RespiratoryTherapy",
+    "Physiotherapy",
+    "Diagnostics",
+    "Telemedicine"
+  ],
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday", "Tuesday", "Wednesday",
+      "Thursday", "Friday", "Saturday", "Sunday"
+    ],
+    "opens": "00:00",
+    "closes": "23:59"
+  }],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+573115081075",
+    "contactType": "customer service",
+    "availableLanguage": ["Spanish"]
+  }
+}
+</script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  "name": "Consulta de Medicina General a Domicilio",
+  "url": "https://www.medigoencas.com/#medicina-general",
+  "provider": {
     "@type": "MedicalClinic",
     "name": "Medigo en Casa",
-    "url": "https://www.medigoencas.com/",
-    "image": "https://www.medigoencas.com/assets/img/og-cover.jpg",
-    "telephone": "+573115081075",
-    "priceRange": "$$",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bogotá",
-      "addressRegion": "Cundinamarca",
-      "addressCountry": "CO"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "4.7110",
-      "longitude": "-74.0721"
-    },
-    "openingHoursSpecification": [{
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-      "opens": "00:00",
-      "closes": "23:59"
-    }],
-    "medicalSpecialty": ["PrimaryCare"]
+    "telephone": "+573115081075"
+  },
+  "areaServed": "Bogotá y Medellín",
+  "availableService": "Consulta médica general en casa",
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "COP",
+    "price": "80000"
   }
-  </script>
+}
+</script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://www.medigoencas.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Servicios Médicos",
+      "item": "https://www.medigoencas.com/#services"
+    }
+  ]
+}
+</script>
 
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="assets/img/logo_medigo.png">
@@ -385,6 +441,19 @@
   border: none;
   font-weight: 600;
 }
+
+.full-card-link {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.full-card-link:hover .service-card {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.20);
+}
+
 </style>
 
   </header>
@@ -448,7 +517,6 @@
     </section>
 
   </main>
-
 <!-- ================================
      ✅ SECCIÓN DE SERVICIOS
 ================================ -->
@@ -469,219 +537,219 @@
 
       <!-- ✅ SERVICIO 1 — Medicina General -->
       <article class="col-md-6" data-aos="fade-up">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/IMG9.JPG"
-               alt="Consulta médica general a domicilio en Bogotá y Medellín"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20consulta%20de%20medicina%20general"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/IMG9.JPG"
+                 alt="Consulta médica general a domicilio en Bogotá y Medellín"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-person-badge"></i> Medicina General a Domicilio</h3>
-            <p>
-              <strong>Consulta médica general en casa</strong> con atención rápida y profesional.
-              Ideal para adultos, niños y adultos mayores.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-person-badge"></i> Medicina General a Domicilio</h3>
+              <p>Consulta médica general en casa con atención rápida y profesional.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20consulta%20de%20medicina%20general"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Agendar consulta
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Agendar consulta
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
       <!-- ✅ SERVICIO 2 — Terapia Respiratoria -->
       <article class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/IMG6.JPG"
-               alt="Terapia respiratoria a domicilio en Bogotá con nebulizaciones"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20terapia%20respiratoria"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/IMG6.JPG"
+                 alt="Terapia respiratoria a domicilio en Bogotá"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-wind me-2"></i>Terapia Respiratoria</h3>
-            <p>
-              Nebulizaciones, manejo respiratorio y oxigenoterapia directamente en tu casa.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-wind me-2"></i> Terapia Respiratoria</h3>
+              <p>Nebulizaciones, manejo respiratorio y oxigenoterapia en casa.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20terapia%20respiratoria"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Solicitar terapia
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Solicitar terapia
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
       <!-- ✅ SERVICIO 3 — Terapia Física -->
       <article class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/IMG3.JPG"
-               alt="Terapia física y rehabilitación a domicilio en Bogotá"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20terapia%20física"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/IMG3.JPG"
+                 alt="Terapia física a domicilio en Bogotá"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-activity me-2"></i>Terapia Física</h3>
-            <p>
-              Rehabilitación, movilidad, fortalecimiento muscular y recuperación postquirúrgica.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-activity me-2"></i> Terapia Física</h3>
+              <p>Rehabilitación, movilidad, fortalecimiento muscular y recuperación.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20terapia%20física"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Solicitar fisioterapia
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Solicitar fisioterapia
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
       <!-- ✅ SERVICIO 4 — Lavado de Oídos -->
       <article class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/lavado_oidos.jpg"
-               alt="Lavado de oídos a domicilio en Bogotá"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20un%20lavado%20de%20oídos"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/lavado_oidos.jpg"
+                 alt="Lavado de oídos a domicilio"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-ear me-2"></i> Lavado de Oídos</h3>
-            <p>
-              Limpieza profesional para eliminar tapones de cera de forma segura.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-ear me-2"></i> Lavado de Oídos</h3>
+              <p>Limpieza profesional para eliminar tapones de cera de forma segura.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20un%20lavado%20de%20oídos"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Solicitar servicio
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Solicitar servicio
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
       <!-- ✅ SERVICIO 5 — Retiro de Suturas -->
       <article class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/suturas.jpg"
-               alt="Retiro de suturas a domicilio en Bogotá"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20el%20retiro%20de%20suturas"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/suturas.jpg"
+                 alt="Retiro de suturas a domicilio"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-scissors me-2"></i>Retiro de Suturas</h3>
-            <p>
-              Retiro de puntos quirúrgicos sin necesidad de salir de casa.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-scissors me-2"></i> Retiro de Suturas</h3>
+              <p>Retiro de puntos quirúrgicos sin necesidad de salir de casa.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20el%20retiro%20de%20suturas"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Solicitar retiro
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Solicitar retiro
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
       <!-- ✅ SERVICIO 6 — Curaciones -->
       <article class="col-md-6" data-aos="fade-up" data-aos-delay="500">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/curacion.jpg"
-               alt="Curaciones médicas a domicilio en Bogotá"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20curación"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/curacion.jpg"
+                 alt="Curaciones médicas a domicilio"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-bandaid me-2"></i>Curaciones Médicas</h3>
-            <p>
-              Manejo profesional de heridas, quemaduras e infecciones.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-bandaid me-2"></i> Curaciones Médicas</h3>
+              <p>Manejo profesional de heridas, quemaduras e infecciones.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20curación"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Solicitar curación
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Solicitar curación
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
       <!-- ✅ SERVICIO 7 — Electrocardiograma -->
       <article class="col-md-6" data-aos="fade-up" data-aos-delay="600">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/IMG7.JPG"
-               alt="Electrocardiograma a domicilio en Bogotá"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20un%20electrocardiograma"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/IMG7.JPG"
+                 alt="Electrocardiograma a domicilio"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-heart-pulse me-2"></i>Electrocardiograma</h3>
-            <p>
-              Estudio cardiovascular con resultados inmediatos en tu hogar.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-heart-pulse me-2"></i> Electrocardiograma</h3>
+              <p>Estudio cardiovascular con resultados inmediatos en tu hogar.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20un%20electrocardiograma"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Solicitar estudio
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Solicitar estudio
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
       <!-- ✅ SERVICIO 8 — Ecografía -->
       <article class="col-md-6" data-aos="fade-up" data-aos-delay="700">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/ecografia.jpg"
-               alt="Ecografía a domicilio en Bogotá"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20ecografía"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/ecografia.jpg"
+                 alt="Ecografía a domicilio"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-image me-2"></i>Ecografía a Domicilio</h3>
-            <p>
-              Estudios ecográficos en casa realizados por personal especializado.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-image me-2"></i> Ecografía a Domicilio</h3>
+              <p>Estudios ecográficos realizados por personal especializado.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20ecografía"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Solicitar ecografía
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Solicitar ecografía
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
       <!-- ✅ SERVICIO 9 — Videoconsulta -->
       <article class="col-md-6" data-aos="fade-up" data-aos-delay="800">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/VIDEO_CON1.jpg"
-               alt="Videoconsulta médica online en Bogotá"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20videoconsulta"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/VIDEO_CON1.jpg"
+                 alt="Videoconsulta médica online"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-camera-video me-2"></i>Videoconsulta Médica</h3>
-            <p>
-              Atención médica virtual inmediata con un profesional de la salud.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-camera-video me-2"></i> Videoconsulta Médica</h3>
+              <p>Atención médica virtual inmediata con un profesional.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20una%20videoconsulta"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Solicitar videoconsulta
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Solicitar videoconsulta
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
       <!-- ✅ SERVICIO 10 — Laboratorio -->
       <article class="col-md-6" data-aos="fade-up" data-aos-delay="900">
-        <div class="card shadow-sm border-0 service-card">
-          <img src="assets/img/IMG8.JPG"
-               alt="Exámenes de laboratorio a domicilio en Bogotá"
-               loading="lazy" class="card-img-top">
+        <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20un%20servicio%20de%20laboratorio"
+           class="full-card-link" target="_blank">
+          <div class="card shadow-sm border-0 service-card">
+            <img src="assets/img/IMG8.JPG"
+                 alt="Exámenes de laboratorio a domicilio"
+                 loading="lazy" class="card-img-top">
 
-          <div class="p-3">
-            <h3><i class="bi bi-droplet me-2"></i>Laboratorio Clínico</h3>
-            <p>
-              Toma de muestras y exámenes clínicos en tu casa con resultados rápidos.
-            </p>
+            <div class="p-3">
+              <h3><i class="bi bi-droplet me-2"></i> Laboratorio Clínico</h3>
+              <p>Toma de muestras y exámenes clínicos en tu casa.</p>
 
-            <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20un%20servicio%20de%20laboratorio"
-               class="btn btn-success btn-sm">
-              <i class="bi bi-whatsapp"></i> Solicitar laboratorio
-            </a>
+              <div class="btn btn-success btn-sm w-100">
+                <i class="bi bi-whatsapp"></i> Solicitar laboratorio
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </article>
 
     </div>
 
   </div>
 </section>
+
 <!-- =======================================
      ✅ SECCIÓN DE BENEFICIOS / POR QUÉ ELEGIRNOS
 ======================================= -->
@@ -964,6 +1032,7 @@
   }
 </style>
 
+<!-- ✅ Botón de WhatsApp -->
 <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20recibir%20información%20sobre%20sus%20servicios."
    id="whatsapp-button"
    target="_blank"
@@ -971,93 +1040,57 @@
    onclick="gtag('event', 'conversion', {'send_to': 'AW-16955964314/ZDNACIvstrUaEJr3nZU_'});">
    <i class="bi bi-whatsapp"></i>
 </a>
+
+<!-- ✅ TRACKING REAL — ClickGuardian -->
 <script>
-(function(){
-  const start = performance.now();
+(function () {
+  const ENDPOINT = "https://clikguardian.onrender.com/track";
+  const t0 = performance.now();
 
-  function fingerprint() {
-    return [
-      navigator.platform,
-      navigator.language,
-      screen.width,
-      screen.height
-    ].join("|");
+  function send(payload){
+    try{
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(payload),
+        keepalive: true
+      });
+    }catch(e){}
   }
 
-  function param(name) {
-    return new URL(location.href).searchParams.get(name);
-  }
+  // ✅ evento de entrada
+  send({
+    type: "land",
+    url: location.href,
+    ref: document.referrer || null,
+    ua: navigator.userAgent
+  });
 
-  function send(eventType){
-    const body = {
-      type: eventType,
-      ts: new Date().toISOString(),
+  // ✅ evento de salida real (calc dwell)
+  window.addEventListener("beforeunload", function(){
+    send({
+      type: "leave",
       url: location.href,
-      ref: document.referrer || null,
-      ua: navigator.userAgent,
-      lang: navigator.language,
-      screen: { w: screen.width, h: screen.height },
-      gclid: param("gclid"),
-      fp: fingerprint()
-    };
+      dwell_ms: Math.round(performance.now() - t0),
+      ua: navigator.userAgent
+    });
+  });
 
-    if (eventType === "leave") {
-      body.dwell_ms = Math.round(performance.now() - start);
+  // ✅ clic real en WhatsApp
+  document.addEventListener("click", function(ev){
+    let a = ev.target.closest("a");
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    if (/wa\.me|api\.whatsapp\.com/.test(href)) {
+      send({
+        type: "whatsapp_click",
+        url: location.href,
+        wa_url: href,
+        ua: navigator.userAgent
+      });
     }
-
-    // ✅ MÉTODO QUE FUNCIONA 100%
-    fetch("https://clikguardian.onrender.com/track", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(body)
-    });
-  }
-
-  send("land");
-  window.addEventListener("beforeunload", () => send("leave"));
-
+  }, true);
 })();
-</script>
-
-<script>
-// ✅ Capturar todos los clics en WhatsApp de forma centralizada
-document.addEventListener("click", function(ev) {
-  const element = ev.target.closest("a");
-
-  if (!element) return;
-
-  const href = element.getAttribute("href") || "";
-
-  // ✅ Detecta todos los enlaces que van a WhatsApp
-  if (href.includes("wa.me") || href.includes("api.whatsapp")) {
-    ev.preventDefault();
-
-    const payload = {
-      type: "whatsapp_click",
-      ts: new Date().toISOString(),
-      url: window.location.href,
-      dest: href,
-      ua: navigator.userAgent,
-      ref: document.referrer || null,
-      fp: [
-        navigator.platform,
-        navigator.language,
-        screen.width,
-        screen.height
-      ].join("|")
-    };
-
-    // ✅ Enviar evento a ClickGuardian
-    fetch("https://clikguardian.onrender.com/track", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(payload)
-    }).finally(() => {
-      // ✅ Ahora sí abrir WhatsApp
-      window.open(href, "_blank");
-    });
-  }
-});
 </script>
 
   </body>
