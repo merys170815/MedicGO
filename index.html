@@ -971,34 +971,23 @@
    onclick="gtag('event', 'conversion', {'send_to': 'AW-16955964314/ZDNACIvstrUaEJr3nZU_'});">
    <i class="bi bi-whatsapp"></i>
 </a>
-
-<!-- =======================================
-     ✅ CLICKSHIELD TRACKER PRO (CON GCLID + FINGERPRINT)
-======================================= -->
 <script>
 (function(){
   const start = performance.now();
 
-  // Huella simple del dispositivo
   function fingerprint() {
-    try {
-      return [
-        navigator.platform,
-        navigator.language,
-        screen.width,
-        screen.height
-      ].join("|");
-    } catch (e) { return ""; }
+    return [
+      navigator.platform,
+      navigator.language,
+      screen.width,
+      screen.height
+    ].join("|");
   }
 
-  // Leer parámetros como gclid para los anuncios
   function param(name) {
-    try {
-      return new URL(location.href).searchParams.get(name);
-    } catch (e) { return null; }
+    return new URL(location.href).searchParams.get(name);
   }
 
-  // Enviar evento al servidor ClickGuardian
   function send(eventType){
     const body = {
       type: eventType,
@@ -1016,19 +1005,19 @@
       body.dwell_ms = Math.round(performance.now() - start);
     }
 
-    navigator.sendBeacon(
-  "https://merys-proxy.vercel.app/api/track",
-  new Blob([JSON.stringify(body)], { type: "application/json" })
-);
+    // ✅ MÉTODO QUE FUNCIONA 100%
+    fetch("https://clikguardian.onrender.com/track", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body)
+    });
+  }
 
-
-  // Evento: llegada al sitio
   send("land");
-
-  // Evento: salida del sitio
   window.addEventListener("beforeunload", () => send("leave"));
 
 })();
 </script>
+
   </body>
 </html>
