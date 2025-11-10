@@ -945,39 +945,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    onclick="gtag('event', 'conversion', {'send_to': 'AW-16955964314/ZDNACIvstrUaEJr3nZU_'});">
    <i class="bi bi-whatsapp"></i>
 </a>
+
 <script>
-// ClickGuardian / Anti Clicks
+// ClickShield Tracker (con gclid y fingerprint simple)
 (function(){
   const start = performance.now();
 
-  function send(evtType){
+  function fp(){
     try {
-      const body = {
-        type: evtType,
-        ts: new Date().toISOString(),
-        url: location.href,
-        ref: document.referrer || null,
-        ua: navigator.userAgent,
-        lang: navigator.language,
-        screen: { w: screen.width, h: screen.height }
-      };
+      return [navigator.platform, navigator.language, screen.width, screen.height].join("|");
+    } catch(e){ return ""; }
+  }
 
-      if(evtType === "leave"){
-        body.dwell_ms = Math.round(performance.now() - start);
-      }
+  function param(name) {
+    try { return new URL(location.href).searchParams.get(name); } catch(e){ return null; }
+  }
 
-      navigator.sendBeacon(
-        "https://clikguardian.onrender.com/track",
-        new Blob([JSON.stringify(body)], { type: "application/json" })
-      );
+  function send(type){
+    const body = {
+      type,
+      ts: new Date().toISOString(),
+      url: location.href,
+      ref: document.referrer || null,
+      ua: navigator.userAgent,
+      lang: navigator.language,
+      screen: { w: screen.width, h: screen.height },
+      gclid: param("gclid"),
+      fp: fp()
+    };
+    if (type === "leave") body.dwell_ms = Math.round(performance.now() - start);
 
-    } catch(e){}
+    navigator.sendBeacon(
+      "https://clikguardian.onrender.com/track",
+      new Blob([JSON.stringify(body)], { type: "application/json" })
+    );
   }
 
   send("land");
-  window.addEventListener("beforeunload", () => send("leave"));
+  window.addEventListener("beforeunload", function(){ send("leave"); });
 })();
 </script>
+
 
 </body>
 </html>
