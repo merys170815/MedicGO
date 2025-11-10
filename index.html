@@ -1019,5 +1019,46 @@
 })();
 </script>
 
+<script>
+// ✅ Capturar todos los clics en WhatsApp de forma centralizada
+document.addEventListener("click", function(ev) {
+  const element = ev.target.closest("a");
+
+  if (!element) return;
+
+  const href = element.getAttribute("href") || "";
+
+  // ✅ Detecta todos los enlaces que van a WhatsApp
+  if (href.includes("wa.me") || href.includes("api.whatsapp")) {
+    ev.preventDefault();
+
+    const payload = {
+      type: "whatsapp_click",
+      ts: new Date().toISOString(),
+      url: window.location.href,
+      dest: href,
+      ua: navigator.userAgent,
+      ref: document.referrer || null,
+      fp: [
+        navigator.platform,
+        navigator.language,
+        screen.width,
+        screen.height
+      ].join("|")
+    };
+
+    // ✅ Enviar evento a ClickGuardian
+    fetch("https://clikguardian.onrender.com/track", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    }).finally(() => {
+      // ✅ Ahora sí abrir WhatsApp
+      window.open(href, "_blank");
+    });
+  }
+});
+</script>
+
   </body>
 </html>
