@@ -945,6 +945,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    onclick="gtag('event', 'conversion', {'send_to': 'AW-16955964314/ZDNACIvstrUaEJr3nZU_'});">
    <i class="bi bi-whatsapp"></i>
 </a>
+<script>
+// ClickGuardian / Anti Clicks
+(function(){
+  const start = performance.now();
+
+  function send(evtType){
+    try {
+      const body = {
+        type: evtType,
+        ts: new Date().toISOString(),
+        url: location.href,
+        ref: document.referrer || null,
+        ua: navigator.userAgent,
+        lang: navigator.language,
+        screen: { w: screen.width, h: screen.height }
+      };
+
+      if(evtType === "leave"){
+        body.dwell_ms = Math.round(performance.now() - start);
+      }
+
+      navigator.sendBeacon(
+        "https://clikguardian.onrender.com/track",
+        new Blob([JSON.stringify(body)], { type: "application/json" })
+      );
+
+    } catch(e){}
+  }
+
+  send("land");
+  window.addEventListener("beforeunload", () => send("leave"));
+})();
+</script>
+
 </body>
 </html>
 
