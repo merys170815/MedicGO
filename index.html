@@ -908,29 +908,21 @@
 
   </div>
 </footer>
-
-<!-- =======================================
-     ✅ SCRIPTS FINALES DEL SITIO
-======================================= -->
-
-<!-- ✅ Bootstrap JS -->
+<!-- ✅ Bootstrap -->
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 
-<!-- ✅ Animaciones AOS -->
+<!-- ✅ AOS Animaciones -->
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init({ once: true });
-</script>
+<script>AOS.init({ once: true });</script>
 
-<!-- ✅ Rotación automática de imágenes del héroe -->
+<!-- ✅ Rotación imágenes héroe -->
 <script>
   const doctorImages = [
     "assets/img/portada1.webp",
     "assets/img/portada4.webp",
     "assets/img/portada3.webp"
   ];
-
   let imgIndex = 0;
   const heroImg = document.getElementById("doctorImage");
 
@@ -944,75 +936,62 @@
   }, 6000);
 </script>
 
-<!-- ✅ Botón fijo de WhatsApp -->
+<!-- ✅ BOTÓN WHATSAPP -->
 <style>
   #whatsapp-button {
     position: fixed;
     bottom: 20px; right: 20px;
     width: 60px; height: 60px;
     background-color: #25D366;
-    color: white;
-    border-radius: 50%;
+    color: white; border-radius: 50%;
     font-size: 28px;
     display: flex; justify-content: center; align-items: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.25);
     z-index: 9999;
-    transition: transform 0.2s ease-in-out;
+    transition: .2s;
   }
-  #whatsapp-button:hover {
-    transform: scale(1.08);
-    background-color: #1ebe5d;
-  }
+  #whatsapp-button:hover { transform: scale(1.08); }
 </style>
 
 <a href="https://wa.me/573115081075?text=Hola%20me%20interesa%20recibir%20información%20sobre%20sus%20servicios."
-   id="whatsapp-button"
-   target="_blank"
-   aria-label="Agendar consulta por WhatsApp"
-   onclick="gtag('event', 'conversion', {'send_to': 'AW-16955964314/ZDNACIvstrUaEJr3nZU_'});">
+   id="whatsapp-button" target="_blank">
    <i class="bi bi-whatsapp"></i>
 </a>
 
-<!-- ✅ FingerprintJS para huella digital REAL -->
+<!-- ✅ Huella digital -->
 <script src="https://openfpcdn.io/fingerprintjs/v3"></script>
 <script>
-  let DEVICE_ID = null;
+let DEVICE_ID = null;
 
-  async function initFingerprint() {
+async function initFingerprint() {
     try {
-      const fp = await FingerprintJS.load();
-      const result = await fp.get();
-      DEVICE_ID = result.visitorId;
-      window.DEVICE_ID = DEVICE_ID;
-      console.log("✅ Huella digital generada:", DEVICE_ID);
-    } catch (e) {
-      console.warn("❌ Error cargando FingerprintJS", e);
-    }
-  }
-
-  initFingerprint();
+        const fp = await FingerprintJS.load();
+        const result = await fp.get();
+        DEVICE_ID = result.visitorId;
+        window.DEVICE_ID = DEVICE_ID;
+    } catch (e) {}
+}
+initFingerprint();
 </script>
 
-<!-- ✅ TRACKING FINAL (único, limpio, con DEVICE_ID) -->
+<!-- ✅ TRACKING (land, leave, WhatsApp) -->
 <script>
 (function () {
   const ENDPOINT = "https://clikguardian.onrender.com/track";
   const t0 = performance.now();
 
   function send(payload){
-    payload.device_id = window.DEVICE_ID || null; // ✅ huella digital incluida
+    payload.device_id = window.DEVICE_ID || null;
 
-    try{
-      fetch(ENDPOINT, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(payload),
-        keepalive: true
-      });
-    }catch(e){}
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(()=>{});
   }
 
-  // ✅ Entrada a la página
+  // land
   send({
     type: "land",
     url: location.href,
@@ -1020,7 +999,7 @@
     ua: navigator.userAgent
   });
 
-  // ✅ Salida de la página
+  // leave
   window.addEventListener("beforeunload", function(){
     send({
       type: "leave",
@@ -1030,7 +1009,7 @@
     });
   });
 
-  // ✅ Clic real en WhatsApp
+  // WhatsApp click
   document.addEventListener("click", function(ev){
     let a = ev.target.closest("a");
     if (!a) return;
@@ -1047,30 +1026,53 @@
 
 })();
 </script>
-<!-- ✅ Guard: bloquea dispositivos baneados antes de cargar la web -->
+<!-- ✅ GUARD (antes de cargar página) -->
 <script>
 (async function(){
   try {
-    // Espera a que FingerprintJS produzca el DEVICE_ID
-    for (let i = 0; i < 10; i++) {
+    // Esperar la huella digital
+    for (let i = 0; i < 20; i++) {
       if (window.DEVICE_ID) break;
-      await new Promise(r => setTimeout(r, 150));
+      await new Promise(r => setTimeout(r, 100));
     }
 
     const resp = await fetch("https://clikguardian.onrender.com/guard", {
       method: "POST",
       headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({ device_id: window.DEVICE_ID || null })
+      body: JSON.stringify({ device_id: window.DEVICE_ID })
     });
 
-    if (!resp.ok) {
-      // 🚫 Dispositivo bloqueado → redirigir a página neutra
+    if (resp.status === 403) {
+      // 🚨 BLOQUEO ANTES DE CARGAR LA WEB
       window.location.replace("/bloqueado.html");
+      return;
     }
-  } catch(e) {
-    console.warn("Guard check failed", e);
-  }
+  } catch(e) {}
 })();
+</script>
+
+<!-- ✅ ULTRA GUARD: bloqueo en vivo cada 2 segundos -->
+<script>
+function startUltraGuard() {
+    setInterval(async () => {
+        if (!window.DEVICE_ID) return;
+
+        const resp = await fetch("https://clikguardian.onrender.com/guard", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ device_id: window.DEVICE_ID })
+        });
+
+        if (resp.status === 403) {
+            // 🚨 BLOQUEO EN TIEMPO REAL: Cierra la página en 0.1s
+            setTimeout(() => {
+              window.location.href = "/bloqueado.html";
+            }, 100);
+        }
+    }, 2000); // ✔ más rápido que antes
+}
+
+startUltraGuard();
 </script>
 
 </body>
