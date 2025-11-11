@@ -850,81 +850,212 @@ setInterval(() => {
    id="whatsapp-button" target="_blank">
    <i class="bi bi-whatsapp"></i>
 </a>
-<!-- ✅ CLICKGUARDIAN — TRACKING + GUARD CORREGIDO -->
+|<!-- ✅ HUELLAS DIGITAL (FingerprintJS) -->
+<script src="https://openfpcdn.io/fingerprintjs/v3"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+let DEVICE_ID = null;
 
-  function send(eventType, extra = {}) {
-    extra.type = eventType;
-    extra.url  = location.href;
-    extra.ref  = document.referrer || null;
-    extra.ua   = navigator.userAgent;
-    extra.device_id = window.DEVICE_ID || null;
+async function initFingerprint() {
+  try {
+    const fp = await FingerprintJS.load();
+    const result = await fp.get();
+    DEVICE_ID = result.visitorId;
+    window.DEVICE_ID = DEVICE_ID;
+  } catch (e) {}
+}
+initFingerprint();
+</script>
 
-    fetch("https://clikguardian.onrender.com/track", {
+<!-- ✅ GUARD INICIAL (bloqueo ANTES de cargar la página) -->
+<script>
+async function firstGuardCheck() {
+  try {
+    for (let i = 0; i < 25; i++) {
+      if (window.DEVICE_ID) break;
+      await new Promise(r => setTimeout(r, 80));
+    }
+
+    const resp = await fetch("https://clikguardian.onrender.com/guard", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(extra),
-      keepalive: true
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ device_id: window.DEVICE_ID })
     });
-  }
 
-  /* ✅ ESPERAR A QUE SE GENERE EL DEVICE_ID */
-  const waitForDevice = setInterval(() => {
+    if (resp.status === 403) {
+      window.stop();
+      document.documentElement.innerHTML = "";
+      window.location.replace("/bloqueado.html");
+      return;
+    }
+  } catch(e){}
+}
+firstGuardCheck();
+</script>
+
+<!-- ✅ FUNCIÓN — chequeo instantáneo -->
+<script>
+async function checkGuardInstant() {
+  if (!window.DEVICE_ID) return;
+  try {
+    const resp = await fetch("https://clikguardian.onrender.com/guard", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ device_id: window.DEVICE_ID })
+    });
+
+    if (resp.status === 403) {
+      window.location.replace("/bloqueado.html");
+    }
+  } catch (e) {}
+}
+</script>
+
+<!-- ✅ TRACK + revalidación -->
+<script>
+function sendAndCheck(payload) {
+  payload.device_id = window.DEVICE_ID || null;
+
+  fetch("https://clikguardian.onrender.com/track", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(payload),
+    keepalive: true
+  }).finally(() => {
+    setTimeout(checkGuardInstant, 200);
+  });
+}
+</script>
+
+<!-- ✅ TRACKING PRINCIPAL -->
+<script>
+(function () {
+  const t0 = performance.now();
+
+  sendAndCheck({
+    type: "land",
+    url: location.href,
+    ref: document.referrer || null,
+    ua: navigator.userAgent
+  });
+
+  window.addEventListener("beforeunload", function(){
+    sendAndCheck({
+      type: "leave",
+      url: location.href,
+      dwell_ms: Math.round(performance.now() - t0),
+      ua: navigator.userAgent
+    });
+  });
+
+  document.addEventListener("click", function(ev){
+    const a = ev.target.closest("a");
+    if (!a) return;
+
+    const href = a.getAttribute("href") || "";
+
+    if (/wa\.me|api\.whatsapp\.com/.test(href)) {
+      sendAndCheck({
+        type: "whatsapp_click",
+        url: location.href,
+        wa_url: href,
+        ua: navigator.userAgent
+      });
+    }
+  }, true);
+
+})();
+</script>
+
+<!-- ✅ ULTRA GUARD cada 1 segundo -->
+<script>
+function startUltraGuard() {
+  setInterval(async () => {
     if (!window.DEVICE_ID) return;
 
-    clearInterval(waitForDevice);
-
-    /* ✅ LAND REAL */
-    const t0 = performance.now();
-    send("land");
-
-    /* ✅ LEAVE */
-    window.addEventListener("beforeunload", () => {
-      const dwell = Math.round(performance.now() - t0);
-      send("leave", { dwell_ms: dwell });
+    const resp = await fetch("https://clikguardian.onrender.com/guard", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ device_id: window.DEVICE_ID })
     });
 
-    /* ✅ Señales humanas */
-    let interacted = false;
+    if (resp.status === 403) {
+      window.location.replace("/bloqueado.html");
+    }
 
-    window.addEventListener("scroll", () => {
-      if (!interacted) {
-        interacted = true;
-        send("scroll");
-      }
-    }, { passive: true });
+  }, 1000);
+}
+startUltraGuard();
+</script>
 
-    window.addEventListener("mousemove", () => {
-      if (!interacted) {
-        interacted = true;
-        send("mousemove");
-      }
-    }, { passive: true });
+<script>
+(function () {
+  // Emite interacción ligera
+  let interacted = false;
+  let lastLandTs = Date.now();
 
-    /* ✅ Usuario fantasma (sin interacción) */
-    setTimeout(() => {
-      if (!interacted) send("ghost_check");
-    }, 10000);
+  function send(type, extra={}) {
+    extra.type = type;
+    extra.url = location.href;
+    extra.ref = document.referrer || null;
+    extra.ua = navigator.userAgent;
+    extra.device_id = window.DEVICE_ID || null;
 
-    /* ✅ Revalidación de bloqueo cada 1s */
-    setInterval(async () => {
-      try {
-        const resp = await fetch("https://clikguardian.onrender.com/guard", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ device_id: window.DEVICE_ID })
+    navigator.sendBeacon
+      ? navigator.sendBeacon("https://clikguardian.onrender.com/track",
+          new Blob([JSON.stringify(extra)], {type: "application/json"}))
+      : fetch("https://clikguardian.onrender.com/track", {
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify(extra),
+          keepalive:true
         });
+  }
 
-        if (resp.status === 403) {
-          window.location.replace("/bloqueado.html");
-        }
-      } catch (e) {}
-    }, 1000);
+  // LAND
+  const t0 = performance.now();
+  lastLandTs = Date.now();
+  send("land");
 
-  }, 100); // revisamos cada 100ms si DEVICE_ID ya existe
+  // LEAVE
+  window.addEventListener("beforeunload", function(){
+    const dwell = Math.round(performance.now() - t0);
+    send("leave", {dwell_ms: dwell});
+  });
 
-});
+  // SCROLL / MOUSEMOVE -> marcan interacción humana
+  let scSent=false, mvSent=false;
+
+  window.addEventListener("scroll", () => {
+    if (!scSent){
+      send("scroll");
+      scSent=true;
+      interacted=true;
+    }
+  }, {passive:true});
+
+  window.addEventListener("mousemove", () => {
+    if (!mvSent){
+      send("mousemove");
+      mvSent=true;
+      interacted=true;
+    }
+  }, {passive:true});
+
+  // GHOST CHECK a los 10s si no interactuó
+  setTimeout(() => {
+    if (!interacted) send("ghost_check");
+  }, 10000);
+
+  // Detectar refresh por visibilitychange
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      const since = Date.now() - lastLandTs;
+      if (since < 3000) send("refresh");
+      lastLandTs = Date.now();
+    }
+  });
+
+})();
 </script>
 
 </body>
