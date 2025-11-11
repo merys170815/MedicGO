@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso bloqueado</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: linear-gradient(135deg, #0d1117, #111b2c, #0a0f17);
+      color: #e6edf3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      padding: 40px 28px;
+      width: 85%;
+      max-width: 420px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      animation: fadeIn .8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 115px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0px 2px 6px rgba(0,0,0,0.3));
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-top: 5px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 15px;
+      opacity: .85;
+      line-height: 1.5;
+    }
+
+    .btn-whatsapp {
+      margin-top: 25px;
+      display: inline-block;
+      background: #25D366;
+      padding: 12px 24px;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform .2s;
+    }
+
+    .btn-whatsapp:hover {
+      transform: scale(1.05);
+      background: #1ebe5d;
+    }
+
+    .note {
+      margin-top: 18px;
+      font-size: 13px;
+      opacity: .6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <img src="https://i.imgur.com/NvyzK6U.png" alt="Logo" class="logo">
+
+    <h1>Acceso bloqueado</h1>
+
+    <p>
+      Por seguridad, este dispositivo ha sido bloqueado temporalmente.<br><br>
+      Si crees que esto es un error, puedes comunicarte con nosotros y validaremos tu acceso.
+    </p>
+
+    <a href="https://wa.me/573115081075?text=Hola%2C%20mi%20acceso%20fue%20bloqueado%20por%20error"
+       class="btn-whatsapp">
+      Contactar por WhatsApp
+    </a>
+
+    <div class="note">
+      MedicGO © Todos los derechos reservados
+    </div>
+  </div>
+
+</body>
+</html>
