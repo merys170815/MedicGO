@@ -850,11 +850,11 @@ setInterval(() => {
    id="whatsapp-button" target="_blank">
    <i class="bi bi-whatsapp"></i>
 </a>
-<!-- ✅ TRACKING & GUARD — VERSIÓN NUEVA Y LIMPIA -->
+<!-- ✅ CLICKGUARDIAN — TRACKING + GUARD CORREGIDO -->
 <script>
-(function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-  function send(eventType, extra={}) {
+  function send(eventType, extra = {}) {
     extra.type = eventType;
     extra.url  = location.href;
     extra.ref  = document.referrer || null;
@@ -863,62 +863,68 @@ setInterval(() => {
 
     fetch("https://clikguardian.onrender.com/track", {
       method: "POST",
-      headers: {"Content-Type":"application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(extra),
       keepalive: true
     });
   }
 
-  // ✅ LAND
-  const t0 = performance.now();
-  send("land");
-
-  // ✅ LEAVE
-  window.addEventListener("beforeunload", function(){
-    const dwell = Math.round(performance.now() - t0);
-    send("leave", { dwell_ms: dwell });
-  });
-
-  // ✅ Human signals
-  let interacted = false;
-
-  window.addEventListener("scroll", function(){
-    if (!interacted){
-      interacted = true;
-      send("scroll");
-    }
-  }, {passive:true});
-
-  window.addEventListener("mousemove", function(){
-    if (!interacted){
-      interacted = true;
-      send("mousemove");
-    }
-  }, {passive:true});
-
-  // ✅ Ghost check (usuario fantasma)
-  setTimeout(() => {
-    if (!interacted) send("ghost_check");
-  }, 10000);
-
-  // ✅ Cada 1 segundo revalida bloqueo
-  setInterval(async () => {
+  /* ✅ ESPERAR A QUE SE GENERE EL DEVICE_ID */
+  const waitForDevice = setInterval(() => {
     if (!window.DEVICE_ID) return;
 
-    try {
-      const resp = await fetch("https://clikguardian.onrender.com/guard", {
-        method:"POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({ device_id: window.DEVICE_ID })
-      });
+    clearInterval(waitForDevice);
 
-      if (resp.status === 403) {
-        window.location.replace("/bloqueado.html");
+    /* ✅ LAND REAL */
+    const t0 = performance.now();
+    send("land");
+
+    /* ✅ LEAVE */
+    window.addEventListener("beforeunload", () => {
+      const dwell = Math.round(performance.now() - t0);
+      send("leave", { dwell_ms: dwell });
+    });
+
+    /* ✅ Señales humanas */
+    let interacted = false;
+
+    window.addEventListener("scroll", () => {
+      if (!interacted) {
+        interacted = true;
+        send("scroll");
       }
-    } catch(e){}
-  }, 1000);
+    }, { passive: true });
 
-})();
+    window.addEventListener("mousemove", () => {
+      if (!interacted) {
+        interacted = true;
+        send("mousemove");
+      }
+    }, { passive: true });
+
+    /* ✅ Usuario fantasma (sin interacción) */
+    setTimeout(() => {
+      if (!interacted) send("ghost_check");
+    }, 10000);
+
+    /* ✅ Revalidación de bloqueo cada 1s */
+    setInterval(async () => {
+      try {
+        const resp = await fetch("https://clikguardian.onrender.com/guard", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ device_id: window.DEVICE_ID })
+        });
+
+        if (resp.status === 403) {
+          window.location.replace("/bloqueado.html");
+        }
+      } catch (e) {}
+    }, 1000);
+
+  }, 100); // revisamos cada 100ms si DEVICE_ID ya existe
+
+});
 </script>
 
 </body>
