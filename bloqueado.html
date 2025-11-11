@@ -3,104 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceso bloqueado</title>
+  <title>Acceso Restringido | Medigo en Casa</title>
+
+  <!-- ✅ Fuente elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-      background: linear-gradient(135deg, #0d1117, #111b2c, #0a0f17);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: radial-gradient(circle at top, #182434, #0d1117 70%);
       color: #e6edf3;
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
 
+    /* ✅ Fondo animado */
+    .glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99,102,241,0.25), transparent 70%);
+      filter: blur(40px);
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: .35; }
+      50% { transform: scale(1.25); opacity: .55; }
+      100% { transform: scale(1); opacity: .35; }
+    }
+
+    /* ✅ Tarjeta principal */
     .card {
-      background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(14px);
-      border-radius: 16px;
-      padding: 40px 28px;
-      width: 85%;
-      max-width: 420px;
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      position: relative;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(22px);
+      border-radius: 20px;
+      padding: 45px 35px;
+      width: 90%;
+      max-width: 450px;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.45);
       animation: fadeIn .8s ease-out;
+      z-index: 10;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* ✅ Logo */
     .logo {
-      width: 115px;
+      width: 120px;
       margin-bottom: 15px;
-      filter: drop-shadow(0px 2px 6px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.35));
+    }
+
+    /* ✅ Ícono de advertencia premium */
+    .alert-icon {
+      font-size: 60px;
+      color: #f87171;
+      margin-bottom: 15px;
+      animation: alertPulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes alertPulse {
+      0% { transform: scale(1); opacity: .9; }
+      50% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: .9; }
     }
 
     h1 {
-      font-size: 24px;
-      margin-top: 5px;
-      margin-bottom: 12px;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
     p {
       font-size: 15px;
       opacity: .85;
-      line-height: 1.5;
+      line-height: 1.6;
+      margin-bottom: 25px;
     }
 
+    /* ✅ Botón WhatsApp PRO */
     .btn-whatsapp {
-      margin-top: 25px;
       display: inline-block;
-      background: #25D366;
-      padding: 12px 24px;
-      border-radius: 12px;
+      padding: 14px 28px;
+      background: linear-gradient(90deg, #25D366, #128C7E);
+      border-radius: 14px;
       color: white;
       font-size: 16px;
       font-weight: 600;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: transform .2s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+      transition: .2s ease;
     }
 
     .btn-whatsapp:hover {
-      transform: scale(1.05);
-      background: #1ebe5d;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
     }
 
     .note {
-      margin-top: 18px;
+      margin-top: 22px;
       font-size: 13px;
-      opacity: .6;
+      opacity: .55;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- Fondo glow -->
+  <div class="glow"></div>
+
+  <!-- Tarjeta -->
   <div class="card">
-    <img src="assets/img/logo_medigo.png" alt="Logo" class="logo">
 
+    <img src="assets/img/logo_medigo.png" alt="Logo Medigo" class="logo">
 
-    <h1>Acceso bloqueado</h1>
+    <div class="alert-icon">⚠️</div>
+
+    <h1>Acceso Bloqueado</h1>
 
     <p>
-      Por seguridad, este dispositivo ha sido bloqueado temporalmente.<br><br>
-      Si crees que esto es un error, puedes comunicarte con nosotros y validaremos tu acceso.
+      Por motivos de seguridad, este dispositivo ha sido restringido temporalmente.<br><br>
+      Si consideras que se trata de un error, contáctanos para validar tu acceso.
     </p>
 
-    <a href="https://wa.me/573115081075?text=Hola%2C%20mi%20acceso%20fue%20bloqueado%20por%20error"
-       class="btn-whatsapp">
-      Contactar por WhatsApp
+    <a class="btn-whatsapp"
+       href="https://wa.me/573115081075?text=Hola%2C%20mi%20acceso%20fue%20bloqueado%20por%20error">
+       Contactar soporte vía WhatsApp
     </a>
 
     <div class="note">
-      MedicGO © Todos los derechos reservados
+      © Medigo en Casa — Sistema de Seguridad ClickGuardian
     </div>
   </div>
 
