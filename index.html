@@ -2,6 +2,38 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+    <!-- ✅ BLOQUEO INMEDIATO ANTES DE CARGAR LA PÁGINA -->
+<script src="https://openfpcdn.io/fingerprintjs/v3"></script>
+<script>
+let DEVICE_ID = null;
+
+(async function(){
+  try {
+    // ✅ Obtener huella solo 1 vez
+    const fp = await FingerprintJS.load();
+    const r = await fp.get();
+    DEVICE_ID = r.visitorId;
+    window.DEVICE_ID = DEVICE_ID;
+
+    // ✅ Guard inicial ANTES de mostrar la página
+    const resp = await fetch("https://clikguardian.onrender.com/guard", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ device_id: DEVICE_ID })
+    });
+
+    if (resp.status === 403) {
+      // 🔥 Bloqueo REAL antes de cargar nada
+      window.stop();
+      document.documentElement.innerHTML = "";
+      window.location.replace("/bloqueado.html");
+      return;
+    }
+
+  } catch(e){}
+})();
+</script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ✅ Título SEO (máx 60 caracteres) -->
@@ -828,7 +860,6 @@ initFingerprint();
 <script>
 async function firstGuardCheck() {
   try {
-    // Espera a que llegue la huella
     for (let i = 0; i < 25; i++) {
       if (window.DEVICE_ID) break;
       await new Promise(r => setTimeout(r, 80));
@@ -841,15 +872,17 @@ async function firstGuardCheck() {
     });
 
     if (resp.status === 403) {
+      window.stop();
+      document.documentElement.innerHTML = "";
       window.location.replace("/bloqueado.html");
       return;
     }
-  } catch(e) {}
+  } catch(e){}
 }
 firstGuardCheck();
 </script>
 
-<!-- ✅ FUNCIÓN — chequeo inmediato -->
+<!-- ✅ FUNCIÓN — chequeo instantáneo -->
 <script>
 async function checkGuardInstant() {
   if (!window.DEVICE_ID) return;
@@ -868,7 +901,7 @@ async function checkGuardInstant() {
 }
 </script>
 
-<!-- ✅ TRACKING + revalidación inmediata -->
+<!-- ✅ TRACK + revalidación -->
 <script>
 function sendAndCheck(payload) {
   payload.device_id = window.DEVICE_ID || null;
@@ -889,7 +922,6 @@ function sendAndCheck(payload) {
 (function () {
   const t0 = performance.now();
 
-  // ✅ Entrada a la página
   sendAndCheck({
     type: "land",
     url: location.href,
@@ -897,7 +929,6 @@ function sendAndCheck(payload) {
     ua: navigator.userAgent
   });
 
-  // ✅ Salida de la página
   window.addEventListener("beforeunload", function(){
     sendAndCheck({
       type: "leave",
@@ -907,7 +938,6 @@ function sendAndCheck(payload) {
     });
   });
 
-  // ✅ Clics en WhatsApp
   document.addEventListener("click", function(ev){
     const a = ev.target.closest("a");
     if (!a) return;
@@ -926,7 +956,7 @@ function sendAndCheck(payload) {
 })();
 </script>
 
-<!-- ✅ ULTRA GUARD cada 1 segundo (mejor protección) -->
+<!-- ✅ ULTRA GUARD cada 1 segundo -->
 <script>
 function startUltraGuard() {
   setInterval(async () => {
@@ -941,10 +971,10 @@ function startUltraGuard() {
     if (resp.status === 403) {
       window.location.replace("/bloqueado.html");
     }
-
-  }, 1000);  // ✅ más rápido y más seguro
+  }, 1000);
 }
 startUltraGuard();
 </script>
+
 </body>
 </html>
