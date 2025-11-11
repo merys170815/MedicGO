@@ -1041,55 +1041,130 @@
    <i class="bi bi-whatsapp"></i>
 </a>
 
-<!-- ✅ TRACKING REAL — ClickGuardian -->
+<!-- ✅ TRACKING REAL — ClickGuardian con DEVICE_ID -->
 <script>
 (function () {
+
   const ENDPOINT = "https://clikguardian.onrender.com/track";
   const t0 = performance.now();
 
-  function send(payload){
-    try{
-      fetch(ENDPOINT, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(payload),
-        keepalive: true
-      });
-    }catch(e){}
+  // ✅ ESTA FUNCIÓN YA NO SE USA
+  // function send() {}
+
+  // ✅ Esperamos a que CG_SEND exista (fingerprint ya cargó)
+  function waitForCGSend(callback){
+    if (window.CG_SEND) callback();
+    else setTimeout(() => waitForCGSend(callback), 50);
   }
 
-  // ✅ evento de entrada
-  send({
-    type: "land",
-    url: location.href,
-    ref: document.referrer || null,
-    ua: navigator.userAgent
-  });
+  waitForCGSend(() => {
 
-  // ✅ evento de salida real (calc dwell)
-  window.addEventListener("beforeunload", function(){
-    send({
-      type: "leave",
+    // ✅ Evento LAND
+    CG_SEND({
+      type: "land",
       url: location.href,
-      dwell_ms: Math.round(performance.now() - t0),
+      ref: document.referrer || null,
       ua: navigator.userAgent
     });
-  });
 
-  // ✅ clic real en WhatsApp
-  document.addEventListener("click", function(ev){
-    let a = ev.target.closest("a");
-    if (!a) return;
-    const href = a.getAttribute("href") || "";
-    if (/wa\.me|api\.whatsapp\.com/.test(href)) {
-      send({
-        type: "whatsapp_click",
+    // ✅ Evento LEAVE (incluye Dwell Time real)
+    window.addEventListener("beforeunload", function(){
+      CG_SEND({
+        type: "leave",
         url: location.href,
-        wa_url: href,
+        dwell_ms: Math.round(performance.now() - t0),
         ua: navigator.userAgent
       });
+    });
+
+    // ✅ Evento WHATSAPP CLICK
+    document.addEventListener("click", function(ev){
+      let a = ev.target.closest("a");
+      if (!a) return;
+      const href = a.getAttribute("href") || "";
+
+      if (/wa\.me|api\.whatsapp\.com/.test(href)) {
+        CG_SEND({
+          type: "whatsapp_click",
+          url: location.href,
+          wa_url: href,
+          ua: navigator.userAgent
+        });
+      }
+    }, true);
+
+  });
+
+})();
+</script>
+
+
+<script>
+(async function(){
+
+  // ========= 1. Obtener datos de hardware =========
+  const fp = {
+    ua: navigator.userAgent,
+    lang: navigator.language,
+    platform: navigator.platform,
+    cores: navigator.hardwareConcurrency || 0,
+    memory: navigator.deviceMemory || 0,
+    touch: navigator.maxTouchPoints || 0,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    screen: `${screen.width}x${screen.height}x${screen.colorDepth}`
+  };
+
+  // ========= 2. Canvas Fingerprint =========
+  function getCanvasFP(){
+    try{
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      ctx.textBaseline = "top";
+      ctx.font = "16px Arial";
+      ctx.fillText("ClickGuardian FP", 2, 2);
+      return canvas.toDataURL();
+    }catch(e){
+      return "NA";
     }
-  }, true);
+  }
+  fp.canvas = getCanvasFP();
+
+  // ========= 3. WebGL Fingerprint =========
+  function getWebGL(){
+    try{
+      const canvas = document.createElement("canvas");
+      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+      return gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL);
+    }catch(e){
+      return "NA";
+    }
+  }
+  fp.webgl = getWebGL();
+
+  // ========= 4. Crear Device ID único =========
+  const device_id = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(JSON.stringify(fp))
+  ).then(buf =>
+    Array.from(new Uint8Array(buf))
+    .map(b => b.toString(16).padStart(2,"0"))
+    .join("")
+  );
+
+  console.log("✅ Device ID generado:", device_id);
+
+  // ========= 5. Enviar al backend en cada evento =========
+  window.CG_SEND = function(eventData){
+    eventData.device_id = device_id;
+    fetch("https://clikguardian.onrender.com/track", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(eventData),
+      keepalive: true
+    });
+  };
+
 })();
 </script>
 
