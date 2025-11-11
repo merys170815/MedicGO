@@ -850,7 +850,8 @@ setInterval(() => {
    id="whatsapp-button" target="_blank">
    <i class="bi bi-whatsapp"></i>
 </a>
-|<!-- ✅ HUELLAS DIGITAL (FingerprintJS) -->
+
+ <!-- ✅ HUELLAS DIGITAL (FingerprintJS) -->
 <script src="https://openfpcdn.io/fingerprintjs/v3"></script>
 <script>
 let DEVICE_ID = null;
@@ -896,6 +897,7 @@ firstGuardCheck();
 <script>
 async function checkGuardInstant() {
   if (!window.DEVICE_ID) return;
+
   try {
     const resp = await fetch("https://clikguardian.onrender.com/guard", {
       method: "POST",
@@ -952,7 +954,6 @@ function sendAndCheck(payload) {
     if (!a) return;
 
     const href = a.getAttribute("href") || "";
-
     if (/wa\.me|api\.whatsapp\.com/.test(href)) {
       sendAndCheck({
         type: "whatsapp_click",
@@ -981,81 +982,9 @@ function startUltraGuard() {
     if (resp.status === 403) {
       window.location.replace("/bloqueado.html");
     }
-
   }, 1000);
 }
 startUltraGuard();
-</script>
-
-<script>
-(function () {
-  // Emite interacción ligera
-  let interacted = false;
-  let lastLandTs = Date.now();
-
-  function send(type, extra={}) {
-    extra.type = type;
-    extra.url = location.href;
-    extra.ref = document.referrer || null;
-    extra.ua = navigator.userAgent;
-    extra.device_id = window.DEVICE_ID || null;
-
-    navigator.sendBeacon
-      ? navigator.sendBeacon("https://clikguardian.onrender.com/track",
-          new Blob([JSON.stringify(extra)], {type: "application/json"}))
-      : fetch("https://clikguardian.onrender.com/track", {
-          method:"POST",
-          headers:{"Content-Type":"application/json"},
-          body: JSON.stringify(extra),
-          keepalive:true
-        });
-  }
-
-  // LAND
-  const t0 = performance.now();
-  lastLandTs = Date.now();
-  send("land");
-
-  // LEAVE
-  window.addEventListener("beforeunload", function(){
-    const dwell = Math.round(performance.now() - t0);
-    send("leave", {dwell_ms: dwell});
-  });
-
-  // SCROLL / MOUSEMOVE -> marcan interacción humana
-  let scSent=false, mvSent=false;
-
-  window.addEventListener("scroll", () => {
-    if (!scSent){
-      send("scroll");
-      scSent=true;
-      interacted=true;
-    }
-  }, {passive:true});
-
-  window.addEventListener("mousemove", () => {
-    if (!mvSent){
-      send("mousemove");
-      mvSent=true;
-      interacted=true;
-    }
-  }, {passive:true});
-
-  // GHOST CHECK a los 10s si no interactuó
-  setTimeout(() => {
-    if (!interacted) send("ghost_check");
-  }, 10000);
-
-  // Detectar refresh por visibilitychange
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
-      const since = Date.now() - lastLandTs;
-      if (since < 3000) send("refresh");
-      lastLandTs = Date.now();
-    }
-  });
-
-})();
 </script>
 
 </body>
