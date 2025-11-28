@@ -1311,7 +1311,6 @@ counters.forEach(counter=>{
    style="bottom:15px;right:20px;width:60px;height:60px;background:#007BFF;color:white;border-radius:50%;font-size:26px;box-shadow:0 4px 8px rgba(0,0,0,0.3);z-index:999;">
    <i class="bi bi-telephone"></i>
 </a>
-
 <!-- ================================
      SCRIPTS FINALES
 ================================ -->
@@ -1320,34 +1319,65 @@ counters.forEach(counter=>{
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init({ once:true });</script>
 
-<!-- ✅ FingerprintJS (huella digital) -->
+<!-- 🔥 FingerprintJS -->
 <script src="https://openfpcdn.io/fingerprintjs/v3"></script>
+
+<!-- =============================================
+   1️⃣  DEVICE ID PERMANENTE (ULTRA RESISTENTE)
+============================================= -->
 <script>
 let DEVICE_ID = null;
-async function initFingerprint() {
-  try {
+
+async function getPermanentDeviceID() {
+
+    // 1. Revisar localStorage
+    let localId = localStorage.getItem("cg_device_id");
+
+    // 2. Revisar cookie
+    let cookieId = document.cookie.split("cgid=")[1]?.split(";")[0];
+
+    if (localId) { DEVICE_ID = localId; return localId; }
+    if (cookieId) {
+        localStorage.setItem("cg_device_id", cookieId);
+        DEVICE_ID = cookieId;
+        return cookieId;
+    }
+
+    // 3. FingerprintJS real
     const fp = await FingerprintJS.load();
     const result = await fp.get();
-    DEVICE_ID = result.visitorId;
-    window.DEVICE_ID = DEVICE_ID;
-  } catch(e){}
+    const fp_id = result.visitorId;
+
+    // 4. Crear ID permanente
+    const full_id = "perm-" + btoa(fp_id + "-" + navigator.userAgent).substring(0, 48);
+
+    // 5. Guardarlo
+    localStorage.setItem("cg_device_id", full_id);
+    document.cookie = "cgid=" + full_id + "; max-age=31536000; path=/";
+
+    DEVICE_ID = full_id;
+    return full_id;
 }
-initFingerprint();
+
+(async () => { await getPermanentDeviceID(); })();
 </script>
 
-<!-- ✅ GUARD inicial antes de mostrar la página -->
+<!-- =============================================
+   2️⃣  PRIMER GUARD (ANTES DE QUE VEAN LA PÁGINA)
+============================================= -->
 <script>
 async function firstGuardCheck() {
   try {
+    // Esperar fingerprint + device permanente
     for (let i = 0; i < 25; i++) {
-      if (window.DEVICE_ID) break;
+      if (DEVICE_ID) break;
       await new Promise(r => setTimeout(r, 80));
     }
 
     const resp = await fetch("https://clikguardian.onrender.com/guard", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ device_id: window.DEVICE_ID })
+      body: JSON.stringify({ device_id: DEVICE_ID })
     });
 
     if (resp.status === 403){
@@ -1361,16 +1391,18 @@ async function firstGuardCheck() {
 firstGuardCheck();
 </script>
 
-<!-- ✅ Chequeo instantáneo -->
+<!-- =============================================
+   3️⃣  CHEQUEO INSTANTÁNEO
+============================================= -->
 <script>
 async function checkGuardInstant(){
-  if (!window.DEVICE_ID) return;
+  if (!DEVICE_ID) return;
 
   try {
     const resp = await fetch("https://clikguardian.onrender.com/guard", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ device_id: window.DEVICE_ID })
+      body: JSON.stringify({ device_id: DEVICE_ID })
     });
 
     if (resp.status === 403){
@@ -1380,10 +1412,12 @@ async function checkGuardInstant(){
 }
 </script>
 
-<!-- ✅ Función unificada para TRACK + chequeo -->
+<!-- =============================================
+   4️⃣  TRACK (LAND / LEAVE / WHATSAPP)
+============================================= -->
 <script>
 function sendAndCheck(payload){
-  payload.device_id = window.DEVICE_ID || null;
+  payload.device_id = DEVICE_ID;
   payload.url  = location.href;
   payload.ref  = document.referrer || null;
   payload.ua   = navigator.userAgent;
@@ -1397,10 +1431,7 @@ function sendAndCheck(payload){
     setTimeout(checkGuardInstant, 200);
   });
 }
-</script>
 
-<!-- ✅ TRACK principal -->
-<script>
 (function () {
   const t0 = performance.now();
 
@@ -1415,7 +1446,7 @@ function sendAndCheck(payload){
     });
   });
 
-  // ✅ TRACK WHATSAPP + origen
+  // WHATSAPP
   document.addEventListener("click", function(ev){
     const a = ev.target.closest("a");
     if (!a) return;
@@ -1434,15 +1465,17 @@ function sendAndCheck(payload){
 })();
 </script>
 
-<!-- ✅ Ultra Guard (1 segundo) -->
+<!-- =============================================
+   5️⃣  ULTRA GUARD (cada 1 segundo)
+============================================= -->
 <script>
 setInterval(() => {
-  if (!window.DEVICE_ID) return;
+  if (!DEVICE_ID) return;
 
   fetch("https://clikguardian.onrender.com/guard", {
     method:"POST",
     headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ device_id: window.DEVICE_ID })
+    body: JSON.stringify({ device_id: DEVICE_ID })
   }).then(resp => {
     if (resp.status === 403){
       window.location.replace("/bloqueado.html");
@@ -1451,7 +1484,9 @@ setInterval(() => {
 }, 1000);
 </script>
 
-<!-- ✅ DETECTOR DE ORIGEN REAL DEL TRÁFICO -->
+<!-- =============================================
+   6️⃣  DETECTOR DE ORIGEN REAL (Analytics)
+============================================= -->
 <script>
 function detectSource(){
   const ref = document.referrer;
