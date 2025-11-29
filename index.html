@@ -1311,6 +1311,8 @@ counters.forEach(counter=>{
    style="bottom:15px;right:20px;width:60px;height:60px;background:#007BFF;color:white;border-radius:50%;font-size:26px;box-shadow:0 4px 8px rgba(0,0,0,0.3);z-index:999;">
    <i class="bi bi-telephone"></i>
 </a>
+
+
 <!-- ================================
      SCRIPTS FINALES (VERSIÓN VPS)
 ================================ -->
@@ -1389,7 +1391,7 @@ async function firstGuardCheck() {
       await new Promise(r => setTimeout(r, 80));
     }
 
-    const resp = await fetch("http://37.60.233.32:5000/guard", {
+    const resp = await fetch("https://api.medigoencas.com/guard", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ device_id: window.DEVICE_ID })
@@ -1414,7 +1416,7 @@ async function checkGuardInstant(){
   if (!window.DEVICE_ID) return;
 
   try {
-    const resp = await fetch("http://37.60.233.32:5000/guard", {
+    const resp = await fetch("https://api.medigoencas.com/guard", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ device_id: window.DEVICE_ID })
@@ -1439,7 +1441,7 @@ function sendAndCheck(payload){
   payload.ua   = navigator.userAgent;
 
   // TRACK CORRECTO (VPS)
-  fetch("http://37.60.233.32:5000/track", {
+  fetch("https://api.medigoencas.com/track", {
     method:"POST",
     headers:{ "Content-Type":"application/json" },
     body: JSON.stringify(payload),
@@ -1494,7 +1496,7 @@ function sendAndCheck(payload){
 setInterval(() => {
   if (!window.DEVICE_ID) return;
 
-  fetch("http://37.60.233.32:5000/guard", {
+  fetch("https://api.medigoencas.com/guard", {
     method:"POST",
     headers:{ "Content-Type":"application/json" },
     body: JSON.stringify({ device_id: window.DEVICE_ID })
