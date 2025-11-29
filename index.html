@@ -1311,27 +1311,26 @@ counters.forEach(counter=>{
    style="bottom:15px;right:20px;width:60px;height:60px;background:#007BFF;color:white;border-radius:50%;font-size:26px;box-shadow:0 4px 8px rgba(0,0,0,0.3);z-index:999;">
    <i class="bi bi-telephone"></i>
 </a>
-
 <!-- ================================
-     SCRIPTS FINALES
+     SCRIPTS FINALES (VERSIÓN VPS)
 ================================ -->
+
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init({ once:true });</script>
 
-<!-- ✅ FingerprintJS (huella digital) -->
+<!-- FingerprintJS -->
 <script src="https://openfpcdn.io/fingerprintjs/v3"></script>
 
-// =======================================
-//  DEVICE ID PERMANENTE — A PRUEBA DE TODO
-// =======================================
-<!-- 🔐 FingerprintJS 100% funcional -->
+<!-- =======================================
+     ⚡ DEVICE ID PERMANENTE
+======================================= -->
 <script>
 window.DEVICE_ID = null;
 
 function generateBackupID(){
-  const raw = navigator.userAgent + "-" + Math.random() + "-" + crypto.randomUUID();
+  const raw = navigator.userAgent + "-" + Date.now() + "-" + Math.random();
   return "perm-" + btoa(raw).substring(0,48);
 }
 
@@ -1342,12 +1341,12 @@ function saveDeviceID(id){
 
 function loadStoredID(){
   try {
-    const a = localStorage.getItem("cg_device_id");
+    let a = localStorage.getItem("cg_device_id");
     if (a) return a;
   } catch(e){}
 
   try {
-    const b = document.cookie.split("cgid=")[1]?.split(";")[0];
+    let b = document.cookie.split("cgid=")[1]?.split(";")[0];
     if (b) return b;
   } catch(e){}
 
@@ -1363,7 +1362,7 @@ async function getPermanentDeviceID(){
 
   let newId = null;
   try {
-    const fp = await import("https://openfpcdn.io/fingerprintjs/v3").then(m => m.load());
+    const fp = await FingerprintJS.load();
     const result = await fp.get();
     const fp_id = result.visitorId;
     newId = "perm-" + btoa(fp_id + "-" + navigator.userAgent).substring(0,48);
@@ -1379,13 +1378,13 @@ async function getPermanentDeviceID(){
 getPermanentDeviceID();
 </script>
 
-
-
-<!-- ✅ GUARD inicial antes de mostrar la página -->
+<!-- =======================================
+     🔐 GUARD INICIAL
+======================================= -->
 <script>
 async function firstGuardCheck() {
   try {
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 30; i++) {
       if (window.DEVICE_ID) break;
       await new Promise(r => setTimeout(r, 80));
     }
@@ -1400,15 +1399,16 @@ async function firstGuardCheck() {
       window.stop();
       document.documentElement.innerHTML = "";
       window.location.replace("/bloqueado.html");
-      return;
     }
+
   } catch(e){}
 }
 firstGuardCheck();
 </script>
 
-
-<!-- ✅ Chequeo instantáneo -->
+<!-- =======================================
+     CHEQUEO INSTANTÁNEO
+======================================= -->
 <script>
 async function checkGuardInstant(){
   if (!window.DEVICE_ID) return;
@@ -1427,27 +1427,34 @@ async function checkGuardInstant(){
 }
 </script>
 
+<!-- =======================================
+     TRACK + GUARD
+======================================= -->
 <script>
 function sendAndCheck(payload){
+
   payload.device_id = window.DEVICE_ID || null;
   payload.url  = location.href;
   payload.ref  = document.referrer || null;
   payload.ua   = navigator.userAgent;
 
+  // TRACK CORRECTO (VPS)
   fetch("http://37.60.233.32:5000/track", {
     method:"POST",
     headers:{ "Content-Type":"application/json" },
     body: JSON.stringify(payload),
     keepalive:true
   }).finally(() => {
-    setTimeout(checkGuardInstant, 200);
+    setTimeout(checkGuardInstant, 150);
   });
 }
 </script>
 
-<!-- ✅ TRACK principal -->
+<!-- =======================================
+     TRACK PRINCIPAL
+======================================= -->
 <script>
-(function () {
+(function(){
   const t0 = performance.now();
 
   // LAND
@@ -1461,7 +1468,7 @@ function sendAndCheck(payload){
     });
   });
 
-  // ✅ TRACK WHATSAPP + origen
+  // WHATSAPP CLICK
   document.addEventListener("click", function(ev){
     const a = ev.target.closest("a");
     if (!a) return;
@@ -1480,7 +1487,9 @@ function sendAndCheck(payload){
 })();
 </script>
 
-<!-- ✅ Ultra Guard (1 segundo) -->
+<!-- =======================================
+     ULTRA GUARD
+======================================= -->
 <script>
 setInterval(() => {
   if (!window.DEVICE_ID) return;
@@ -1494,11 +1503,13 @@ setInterval(() => {
       window.location.replace("/bloqueado.html");
     }
   });
-}, 1000);
+
+}, 1200);
 </script>
 
-
-<!-- ✅ DETECTOR DE ORIGEN REAL DEL TRÁFICO -->
+<!-- =======================================
+     DETECTOR DE ORIGEN
+======================================= -->
 <script>
 function detectSource(){
   const ref = document.referrer;
