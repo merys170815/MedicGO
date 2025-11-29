@@ -1311,7 +1311,6 @@ counters.forEach(counter=>{
    style="bottom:15px;right:20px;width:60px;height:60px;background:#007BFF;color:white;border-radius:50%;font-size:26px;box-shadow:0 4px 8px rgba(0,0,0,0.3);z-index:999;">
    <i class="bi bi-telephone"></i>
 </a>
-
 <!-- ================================
      SCRIPTS FINALES
 ================================ -->
@@ -1320,14 +1319,13 @@ counters.forEach(counter=>{
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init({ once:true });</script>
 
-<!-- ✅ FingerprintJS (huella digital) -->
+<!-- FingerprintJS -->
 <script src="https://openfpcdn.io/fingerprintjs/v3"></script>
 
-// =======================================
-//  DEVICE ID PERMANENTE — A PRUEBA DE TODO
-// =======================================
-<!-- 🔐 FingerprintJS 100% funcional -->
 <script>
+// =====================================================
+//  DEVICE ID PERMANENTE
+// =====================================================
 window.DEVICE_ID = null;
 
 function generateBackupID(){
@@ -1379,9 +1377,9 @@ async function getPermanentDeviceID(){
 getPermanentDeviceID();
 </script>
 
-
-
-<!-- ✅ GUARD inicial antes de mostrar la página -->
+<!-- =====================================================
+     🛡️ GUARD inicial EN TU VPS (MUY IMPORTANTE)
+===================================================== -->
 <script>
 async function firstGuardCheck() {
   try {
@@ -1390,7 +1388,7 @@ async function firstGuardCheck() {
       await new Promise(r => setTimeout(r, 80));
     }
 
-    const resp = await fetch("https://clikguardian.onrender.com/guard", {
+    const resp = await fetch("http://37.60.233.32:5000/guard", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ device_id: window.DEVICE_ID })
@@ -1407,13 +1405,13 @@ async function firstGuardCheck() {
 firstGuardCheck();
 </script>
 
-<!-- ✅ Chequeo instantáneo -->
+<!-- Chequeo instantáneo en TU VPS -->
 <script>
 async function checkGuardInstant(){
   if (!window.DEVICE_ID) return;
 
   try {
-    const resp = await fetch("https://clikguardian.onrender.com/guard", {
+    const resp = await fetch("http://37.60.233.32:5000/guard", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ device_id: window.DEVICE_ID })
@@ -1426,7 +1424,9 @@ async function checkGuardInstant(){
 }
 </script>
 
-<!-- ✅ Función unificada para TRACK + chequeo -->
+<!-- =====================================================
+     Función unificada para TRACK EN TU VPS
+===================================================== -->
 <script>
 function sendAndCheck(payload){
   payload.device_id = window.DEVICE_ID || null;
@@ -1434,7 +1434,7 @@ function sendAndCheck(payload){
   payload.ref  = document.referrer || null;
   payload.ua   = navigator.userAgent;
 
-  fetch("https://clikguardian.onrender.com/track", {
+  fetch("http://37.60.233.32:5000/track", {
     method:"POST",
     headers:{ "Content-Type":"application/json" },
     body: JSON.stringify(payload),
@@ -1445,15 +1445,13 @@ function sendAndCheck(payload){
 }
 </script>
 
-<!-- ✅ TRACK principal -->
+<!-- TRACK principal -->
 <script>
 (function () {
   const t0 = performance.now();
 
-  // LAND
   sendAndCheck({ type: "land" });
 
-  // LEAVE
   window.addEventListener("beforeunload", function(){
     sendAndCheck({
       type:"leave",
@@ -1461,7 +1459,6 @@ function sendAndCheck(payload){
     });
   });
 
-  // ✅ TRACK WHATSAPP + origen
   document.addEventListener("click", function(ev){
     const a = ev.target.closest("a");
     if (!a) return;
@@ -1480,12 +1477,12 @@ function sendAndCheck(payload){
 })();
 </script>
 
-<!-- ✅ Ultra Guard (1 segundo) -->
+<!-- Ultra Guard (cada 1s, pero EN TU VPS) -->
 <script>
 setInterval(() => {
   if (!window.DEVICE_ID) return;
 
-  fetch("https://clikguardian.onrender.com/guard", {
+  fetch("http://37.60.233.32:5000/guard", {
     method:"POST",
     headers:{ "Content-Type":"application/json" },
     body: JSON.stringify({ device_id: window.DEVICE_ID })
@@ -1497,7 +1494,7 @@ setInterval(() => {
 }, 1000);
 </script>
 
-<!-- ✅ DETECTOR DE ORIGEN REAL DEL TRÁFICO -->
+<!-- Detector origen tráfico -->
 <script>
 function detectSource(){
   const ref = document.referrer;
