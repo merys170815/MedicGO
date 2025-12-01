@@ -1573,5 +1573,123 @@ counters.forEach(counter=>{
   }, 1200);
 </script>
 
+<!-- ============================================
+     1️⃣ DETECTOR DE VPN / PROXY / IP ANÓMALA
+=============================================== -->
+<script>
+async function detectVPNProxy() {
+  let vpn = false;
+  try {
+    const ipCheck = await fetch("https://api.ipify.org?format=json");
+    const data = await ipCheck.json();
+
+    const publicIP = data.ip || null;
+    let tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    let lang = navigator.language || "";
+    let regionMismatch = false;
+
+    // Región del navegador no coincide con país → riesgo alto
+    if (!lang.includes("es") && !tz.includes("Bogota")) {
+      regionMismatch = true;
+    }
+
+    sendAndCheck({
+      type: "vpn_check",
+      public_ip: publicIP,
+      tz: tz,
+      lang: lang,
+      region_mismatch: regionMismatch
+    });
+
+  } catch(e){
+    console.error("VPN check error", e);
+  }
+}
+detectVPNProxy();
+</script>
+
+
+<!-- ============================================
+     2️⃣ DETECTOR DE RAGE CLICKS
+=============================================== -->
+<script>
+let rageClicks = 0;
+let rageTimer = null;
+
+document.addEventListener("click", () => {
+  rageClicks++;
+  if (!rageTimer) {
+    rageTimer = setTimeout(() => {
+      if (rageClicks >= 5) {
+        sendAndCheck({ type: "rage_click", clicks: rageClicks });
+      }
+      rageClicks = 0;
+      rageTimer = null;
+    }, 1000);
+  }
+});
+</script>
+
+
+<!-- ============================================
+     3️⃣ DETECTOR DE MULTI-TAB
+=============================================== -->
+<script>
+const MULTI_KEY = "medigo_tab_open";
+
+localStorage.setItem(MULTI_KEY, Date.now());
+
+window.addEventListener("storage", (ev) => {
+  if (ev.key === MULTI_KEY) {
+    sendAndCheck({ type: "multi_tab" });
+  }
+});
+</script>
+
+
+<!-- ============================================
+     4️⃣ DETECTOR DE SCROLL ANÓMALO
+=============================================== -->
+<script>
+let scrollEvents = 0;
+let firstScrollTime = null;
+
+window.addEventListener("scroll", () => {
+  scrollEvents++;
+  if (!firstScrollTime) firstScrollTime = Date.now();
+});
+
+setInterval(() => {
+  if (!firstScrollTime) {
+    // Usuario no scrollea nada (bot típico)
+    sendAndCheck({ type: "scroll_pattern", pattern: "no_scroll" });
+  } else if (scrollEvents > 100) {
+    // Demasiado scroll → comportamiento no humano
+    sendAndCheck({ type: "scroll_pattern", pattern: "excessive_scroll" });
+  }
+
+  // Reset
+  scrollEvents = 0;
+  firstScrollTime = null;
+}, 8000);
+</script>
+
+
+<!-- ============================================
+     5️⃣ HONEYPOT INVISIBLE ANTI-BOTS
+=============================================== -->
+<script>
+document.body.insertAdjacentHTML("beforeend",
+  '<input type="text" id="trap_field" style="display:none!important;">'
+);
+
+setInterval(() => {
+  const trap = document.getElementById("trap_field");
+  if (trap && trap.value.length > 0) {
+    sendAndCheck({ type: "honeypot_trigger", value: trap.value });
+  }
+}, 1200);
+</script>
+
 </body>
 </html>
