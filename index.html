@@ -1321,8 +1321,20 @@ counters.forEach(counter=>{
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init({ once:true });</script>
 
-<!-- FingerprintJS (para DeviceID permanente) -->
-<script src="https://openfpcdn.io/fingerprintjs/v3"></script>
+
+<script type="module">
+  import FingerprintJS from "https://openfpcdn.io/fingerprintjs/v3/dist/fp.esm.min.js";
+
+  window.loadFP = async () => {
+    try {
+      return await FingerprintJS.load();
+    } catch(e) {
+      console.error("Fingerprint no cargó", e);
+      return null;
+    }
+  };
+</script>
+
 
 <!-- =======================================
      ⚡ DEVICE ID PERMANENTE (PRO)
@@ -1355,25 +1367,25 @@ counters.forEach(counter=>{
   }
 
   async function getPermanentDeviceID(){
-    // 1️⃣ Si ya existe guardado → usarlo
     let stored = loadStoredID();
     if (stored){
       window.DEVICE_ID = stored;
       return stored;
     }
 
-    // 2️⃣ Si no existe, generamos uno con FingerprintJS + datos del navegador
+    let fpInstance = await window.loadFP();
     let newId = null;
+
     try {
-      const fp = await FingerprintJS.load();
-      const result = await fp.get();
-      const fp_id = result.visitorId || "";
-      const combo = fp_id + "|" + navigator.userAgent + "|" + (navigator.language || "") +
-                    "|" + (window.screen.width + "x" + window.screen.height) +
-                    "|" + (Intl.DateTimeFormat().resolvedOptions().timeZone || "") +
-                    "|" + (navigator.platform || "");
-      newId = "perm-" + btoa(combo).substring(0,48);
+      if (fpInstance){
+        const result = await fpInstance.get();
+        newId = "perm-" + result.visitorId;
+      }
     } catch(e){
+      newId = null;
+    }
+
+    if (!newId){
       newId = generateBackupID();
     }
 
@@ -1382,7 +1394,6 @@ counters.forEach(counter=>{
     return newId;
   }
 
-  // Lanzar inicialización
   getPermanentDeviceID();
 </script>
 
