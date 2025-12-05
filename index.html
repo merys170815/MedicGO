@@ -1352,67 +1352,6 @@ counters.forEach(counter=>{
 </script>
 
 <!-- =======================================
-     ⚡ DEVICE ID PERMANENTE (PRO)
-======================================= -->
-<script>
-  window.DEVICE_ID = null;
-
-  function generateBackupID(){
-    const raw = navigator.userAgent + "-" + Date.now() + "-" + Math.random();
-    return "perm-" + btoa(raw).substring(0,48);
-  }
-
-  function saveDeviceID(id){
-    try { localStorage.setItem("cg_device_id", id); } catch(e){}
-    document.cookie = "cgid="+id+"; max-age=31536000; path=/";
-  }
-
-  function loadStoredID(){
-    try {
-      let a = localStorage.getItem("cg_device_id");
-      if (a) return a;
-    } catch(e){}
-
-    try {
-      let b = document.cookie.split("cgid=")[1]?.split(";")[0];
-      if (b) return b;
-    } catch(e){}
-
-    return null;
-  }
-
-  async function getPermanentDeviceID(){
-    let stored = loadStoredID();
-    if (stored){
-      window.DEVICE_ID = stored;
-      return stored;
-    }
-
-    let fpInstance = await window.loadFP();
-    let newId = null;
-
-    try {
-      if (fpInstance){
-        const result = await fpInstance.get();
-        newId = "perm-" + result.visitorId;
-      }
-    } catch(e){
-      newId = null;
-    }
-
-    if (!newId){
-      newId = generateBackupID();
-    }
-
-    saveDeviceID(newId);
-    window.DEVICE_ID = newId;
-    return newId;
-  }
-
-  getPermanentDeviceID();
-</script>
-
-<!-- =======================================
      🔐 GUARD INICIAL
 ======================================= -->
 <script>
