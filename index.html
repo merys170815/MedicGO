@@ -1328,15 +1328,27 @@ counters.forEach(counter=>{
 <script type="module">
   import FingerprintJS from "https://openfpcdn.io/fingerprintjs/v3";
 
-  window.loadFP = async () => {
-    try {
-      const fp = await FingerprintJS.load();
-      return fp;
-    } catch(e) {
-      console.error("Fingerprint no cargó", e);
-      return null;
+  window.DEVICE_ID = null;
+
+  async function getPermanentDeviceID() {
+    let stored = localStorage.getItem("cg_device_id");
+    if (stored) {
+      window.DEVICE_ID = stored;
+      return stored;
     }
-  };
+
+    let fp = await FingerprintJS.load();
+    let result = await fp.get();
+    let newId = "perm-" + result.visitorId;
+
+    localStorage.setItem("cg_device_id", newId);
+    document.cookie = "cgid="+newId+"; max-age=31536000; path=/";
+
+    window.DEVICE_ID = newId;
+    return newId;
+  }
+
+  getPermanentDeviceID();
 </script>
 
 <!-- =======================================
