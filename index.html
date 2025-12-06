@@ -1613,34 +1613,6 @@ window.addEventListener("storage", (ev) => {
 });
 </script>
 
-
-<!-- ============================================
-     4️⃣ DETECTOR DE SCROLL ANÓMALO
-=============================================== -->
-<script>
-let scrollEvents = 0;
-let firstScrollTime = null;
-
-window.addEventListener("scroll", () => {
-  scrollEvents++;
-  if (!firstScrollTime) firstScrollTime = Date.now();
-});
-
-setInterval(() => {
-  if (!firstScrollTime) {
-    // Usuario no scrollea nada (bot típico)
-    sendAndCheck({ type: "scroll_pattern", pattern: "no_scroll" });
-  } else if (scrollEvents > 100) {
-    // Demasiado scroll → comportamiento no humano
-    sendAndCheck({ type: "scroll_pattern", pattern: "excessive_scroll" });
-  }
-
-  // Reset
-  scrollEvents = 0;
-  firstScrollTime = null;
-}, 8000);
-</script>
-
 <!-- ============================================
      🛡 HONEYPOT INVISIBLE — Solo por Evento
 =============================================== -->
