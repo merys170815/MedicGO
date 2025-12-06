@@ -1641,21 +1641,28 @@ setInterval(() => {
 }, 8000);
 </script>
 
-
 <!-- ============================================
-     5️⃣ HONEYPOT INVISIBLE ANTI-BOTS
+     🛡 HONEYPOT INVISIBLE — Solo por Evento
 =============================================== -->
 <script>
-document.body.insertAdjacentHTML("beforeend",
-  '<input type="text" id="trap_field" style="display:none!important;">'
-);
+  // 1️⃣ Crea el input trampa invisible
+  document.body.insertAdjacentHTML("beforeend",
+    '<input type="text" id="trap_field" style="display:none!important;">'
+  );
 
-setInterval(() => {
-  const trap = document.getElementById("trap_field");
-  if (trap && trap.value.length > 0) {
-    sendAndCheck({ type: "honeypot_trigger", value: trap.value });
-  }
-}, 1200);
+  // 2️⃣ Detecta cuando ALGUIEN (bot) escribe
+  document.addEventListener("input", function(ev){
+    // Solo si el target es nuestro trap
+    if(ev.target && ev.target.id === "trap_field"){
+      const value = ev.target.value || "";
+
+      // Enviar señal inmediata
+      sendAndCheck({
+        type: "honeypot_trigger",
+        value: value
+      });
+    }
+  });
 </script>
 
 </body>
